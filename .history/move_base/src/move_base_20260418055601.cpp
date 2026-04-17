@@ -886,8 +886,8 @@ void MoveBase::callback_selfMaterialNumber(const std_msgs::UInt8MultiArray::Cons
             {
               // printf("foundObstacleFlag == %d \n",foundObstacleFlag);
               float tagetAngle = sLineControl(current_position, global_plan, &pursuitSpeed);
-              cmd_vel.linear.x = pursuitSpeed *1.265;//ysvv速度
-              cmd_vel.angular.z = tagetAngle *1.405;//ysvv角速度
+              cmd_vel.linear.x = pursuitSpeed *1.28;//ysvv速度
+              cmd_vel.angular.z = tagetAngle *1.12;//ysvv角速度
               if (foundObstacleFlag == 1)
               {
                 cmd_vel.linear.x = 0.0;
