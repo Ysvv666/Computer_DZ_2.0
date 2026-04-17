@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@github.com:Ysvv666/Computer_DZ.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[user]
+	name = 你的名字
+[branch "main"]
+	remote = origin
+	merge = refs/heads/main

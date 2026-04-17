@@ -1,0 +1,192 @@
+# Teb Local Planner 配置文件
+# 说明：只添加注释，不修改任何参数的键或数值。
+# 单位说明：速度单位为 m/s，角速度为 rad/s，距离为 m，角度为 rad，时间为 s。
+# 使用建议：调参时仅修改数值；本次提交仅增加说明性注释以便阅读。
+TebLocalPlannerROS:
+ 
+# 里程计话题名称，通常为机器人里程计发布的话题
+odom_topic: odom
+# 全局地图坐标系（用于将轨迹和全局路径转换到一致的参考系）
+map_frame: map
+ 
+ # Trajectory 轨迹参数
+ # 是否自动调整轨迹时间步长和节点数（True 时自动计算时间步）
+teb_autosize: True 
+ # 期望的时间步长（s），用于采样轨迹时间间隔的参考值
+dt_ref: 0.3 
+ # 时间步长的滞后值（s），允许 dt 在 [dt_ref - dt_hysteresis, dt_ref + dt_hysteresis]
+dt_hysteresis: 0.03
+ # 是否用全局路径的朝向覆盖本地轨迹的朝向（True 会覆盖）
+global_plan_overwrite_orientation: False 
+ # 允许用后退运动初始化（注释掉表示保留默认）
+ #allow_init_with_backwards_motion:False 
+ # 全局规划向前看的最大距离（m），用于截取近段全局路径
+max_global_plan_lookahead_dist: 3.0 
+ # 可行性检查时考虑的姿态数量（用于快速可行性判定）
+feasibility_check_no_poses: 5 
+ 
+ # Robot 机器人运动学与速度约束
+ # 最大前向线速度 (m/s)
+max_vel_x: 0.4  #表示m/s
+ # 最大合成平移速度 (m/s)，通常与 `max_vel_x` 相同
+max_vel_trans: 0.4   #必须与max_vel_x相同
+ # 最大角速度 (rad/s)
+max_vel_theta: 0.4   #表示rad/s转向速度
+ # 最大倒退速度 (m/s)
+max_vel_x_backwards: 0.2  #表示最大后退速度 m/s
+ # 侧向速度 (m/s)，对差速或全向平台有用，常为 0
+max_vel_y: 0.0 
+
+ # 线性/角加速度限制
+ # 前向加速度限制 (m/s^2)
+acc_lim_x: 0.07 #前进加速度
+ # 侧向加速度限制 (m/s^2)
+acc_lim_y: 0.07  
+ # 角加速度限制 (rad/s^2)
+acc_lim_theta: 0.12  #转向加速度
+ 
+ # 优化相关权重与几何参数
+ # 优化目标的时间权重（>0），值越大越“赶时间”
+weight_optimaltime: 1.2 # must be > 0 ,让机器人 “赶时间” → 越大约快
+
+ # 车辆轴距（m），用于某些运动学模型（若非差速可设为近似值）
+wheelbase: 0.10
+ # 最小转弯半径 (m)，用于限制曲率
+min_turning_radius: 0.9
+
+ # 是否用目标角度命令代替角速度命令（False 使用角速度）
+cmd_angle_instead_rotvel: False
+
+ # 机器人足迹模型（碰撞检测用）
+footprint_model:
+ type: "polygon"
+ # 足迹顶点列表，顺时针或逆时针排列，单位 m
+ vertices: [[-0.1, -0.1], [-0.1, 0.1], [0.1, 0.1], [0.1, -0.1]] 
+
+ # 到达目标的平移/角度公差
+xy_goal_tolerance: 0.1  
+yaw_goal_tolerance: 0.1
+ # 到达目标后是否允许非零速度视为到达（True 允许）
+free_goal_vel: False 
+ 
+ # Obstacles 障碍物相关参数
+ # 与障碍物的最小允许距离 (m)，小于此值会被视为碰撞
+min_obstacle_dist: 0.1 
+ # 是否包含 costmap 中的静态障碍物
+include_costmap_obstacles: True 
+ # 在机器人后方考虑 costmap 障碍物的最大距离 (m)
+costmap_obstacles_behind_robot_dist: 1.5  #default:1.5  0.0~20.0
+ # 考虑的障碍物姿态数量（影响成本计算的点数）
+obstacle_poses_affected: 15   
+ # costmap 转换插件名称（为空表示不使用）
+costmap_converter_plugin: ""
+ # costmap 转换是否在独立线程中运行
+costmap_converter_spin_thread: True
+ # costmap 转换线程频率 (Hz)
+costmap_converter_rate: 5
+ # 是否包含动态障碍物（如移动目标）
+include_dynamic_obstacles: True 
+ # 对动态障碍物的膨胀距离 (m)
+dynamic_obstacle_inflation_dist: 0.6 
+ 
+ # Optimization 优化参数
+ # 内层优化迭代次数（每次外层迭代执行的内层次数）
+no_inner_iterations: 5 
+ # 外层优化迭代次数
+no_outer_iterations: 4  
+ # 是否启用优化器
+optimization_activate: True 
+ # 是否打印优化过程的详细信息（True 打印）
+optimization_verbose: False 
+ # 惩罚松弛参数，避免数值不稳定
+penalty_epsilon: 0.05
+ # 障碍物代价的指数因子（越大对近障碍惩罚越强）
+obstacle_cost_exponent: 4
+ # 各类目标的权重（用于组合代价函数）
+ # 最大线速度约束权重
+weight_max_vel_x: 1  
+ # 最大角速度约束权重
+weight_max_vel_theta: 1 
+ # 加速度约束权重（线加速度）
+weight_acc_lim_x: 2  
+ # 加速度约束权重（角加速度）
+weight_acc_lim_theta: 1  
+ # 非线性运动学约束权重（高值强制满足非线性约束）
+weight_kinematics_nh: 1000
+ # 前进驱动的运动学权重（鼓励前进驱动解）
+weight_kinematics_forward_drive: 1
+ # 转弯半径相关权重（鼓励遵循最小转弯半径）
+weight_kinematics_turning_radius: 1 
+
+ # 最短路径权重（0 表示不优先）
+weight_shortest_path: 0 
+ # 静态障碍物代价权重（越大越避障）
+weight_obstacle: 100
+ # 障碍物膨胀成本权重
+weight_inflation: 0.2   
+ # 动态障碍物代价权重
+weight_dynamic_obstacle: 10
+ # 动态障碍物膨胀影响权重
+weight_dynamic_obstacle_inflation: 0.2  
+ # 途经点 (viapoint) 的权重
+weight_viapoint: 1  
+ # 自适应因子权重（用于比例调整某些权重）
+weight_adapt_factor: 2 
+ 
+ # Homotopy Class Planner 同伦类别规划相关（用于多拓扑路径搜索）
+ # 是否启用同伦类规划（False 关闭）
+enable_homotopy_class_planning: False 
+ # 是否启用多线程以加速同伦类计算
+enable_multithreading: True 
+ # 最多允许的同伦类数量
+max_number_classes: 5 
+ # 选择代价时的滞后因子，防止频繁切换
+selection_cost_hysteresis: 1.0 
+ # 是否优先选择初始解（值越接近 1 越倾向于初始解）
+selection_prefer_initial_plan: 0.95
+ # 障碍物代价缩放（选择不同同伦类时的障碍成本缩放）
+selection_obst_cost_scale: 1.0
+ # 是否在选择时考虑时间代价的替代项
+selection_alternative_time_cost: False
+
+ # 路网采样相关参数
+roadmap_graph_no_samples: 15
+ # 路网覆盖区域宽度（m）
+roadmap_graph_area_width: 5
+ # 路网长度尺度调整因子
+roadmap_graph_area_length_scale: 1.0
+ # H-signature 缩放器，用于衡量拓扑差异
+h_signature_prescaler: 0.5
+ # H-signature 阈值，小于此认为同一同伦类
+h_signature_threshold: 0.1
+ # 障碍物朝向阈值（用于判断障碍物方向相关性）
+obstacle_heading_threshold: 0.45
+ # 切换阻塞时间（s），防止短时间内频繁切换同伦类
+switching_blocking_period: 0.0
+ # 是否把所有 viapoint 作为候选
+viapoints_all_candidates: True
+ # 是否删除导致后退的绕行路径
+delete_detours_backwards: True
+ # 绕行路径最长时长与最佳时长之比阈值
+max_ratio_detours_duration_best_duration: 3.0
+ # 可视化同伦类图（True 显示）
+visualize_hc_graph: False
+ # 在可视化时是否用时间作为 z 轴缩放
+visualize_with_time_as_z_axis_scale: False
+ 
+ # Recovery 恢复策略相关
+ # 是否在备份时收缩时间窗口以尝试恢复
+shrink_horizon_backup: True
+ # 收缩时间窗口的最小持续时间（s）
+shrink_horizon_min_duration: 10
+ # 是否启用振荡（oscillation）恢复策略
+oscillation_recovery: False 
+ # 振荡检测时线速度阈值 (m/s)
+oscillation_v_eps: 0.1
+ # 振荡检测时角速度阈值 (rad/s)
+oscillation_omega_eps: 0.1
+ # 振荡恢复触发的最短持续时间（s）
+oscillation_recovery_min_duration: 10
+ # 振荡检测使用的滤波时长（s）
+oscillation_filter_duration: 10
+ 

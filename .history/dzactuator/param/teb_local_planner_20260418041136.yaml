@@ -1,0 +1,104 @@
+TebLocalPlannerROS:
+ 
+ odom_topic: odom # 里程计话题名称，用于获取机器人速度和位姿的里程计信息
+ map_frame: map # 全局坐标系（地图坐标系）的frame id
+ 
+ # Trajectory 调参
+ teb_autosize: True # 自动调整轨迹长度（True: 自动，False: 固定长度）
+ dt_ref: 0.2 # 时间离散参考步长（s），较短可提高轨迹精度但增大计算量
+ dt_hysteresis: 0.03 # 时间步长抖动余量，用于稳定dt自动缩放
+ global_plan_overwrite_orientation: False # 是否使用全局路径的朝向覆盖局部轨迹初始朝向
+ # allow_init_with_backwards_motion: False # 是否允许初始反向运动（注释掉表示使用默认）
+ max_global_plan_lookahead_dist: 6.0 # 全局路径前瞻距离（m），影响局部路径参考范围
+ feasibility_check_no_poses: 5 # 可行性检查使用的采样位姿数量
+ 
+ # 机器人动力学参数（务必符合机器人实际能力）
+ max_vel_x: 0.45 # 前进最大线速度 (m/s)
+ max_vel_y: 0.0 # 侧向最大速度（通常差速/非全向车设置为0）
+ max_vel_x_backwards: 0.5 # 后退最大线速度 (m/s)
+ max_vel_theta: 0.22 # 最大角速度 (rad/s)，提高以更好跟踪弧线转向
+ acc_lim_x: 0.3  # 线速度加速度上限 (m/s^2)，提高以减少减速停顿现象
+ acc_lim_y: 0.05  # 侧向加速度上限 (m/s^2)
+ acc_lim_theta: 0.3 # 角加速度上限 (rad/s^2)，增大以平滑角速度响应并减少超调
+ max_vel_trans: 0.45 # 线速度合成限制，应与 `max_vel_x` 保持一致以避免冲突
+
+
+ 
+ wheelbase: 0.10 # 车轮轴距或机器人前后轴距离（m），用于运动学约束
+ min_turning_radius: 0.25 # 最小允许转弯半径 (m)，减小以允许更小曲率轨迹
+ 
+ cmd_angle_instead_rotvel: False # 是否发送角度命令代替角速度（通常False）
+ 
+ footprint_model:
+  type: "polygon" # 机器人占位模型类型（circle / polygon / two_circles）
+  vertices: [[-0.1, -0.1], [-0.1, 0.1], [0.1, 0.1], [0.1, -0.1]] # 多边形顶点，顺时针或逆时针，单位m
+
+ xy_goal_tolerance: 0.1  # 目标位置允许误差 (m)
+ yaw_goal_tolerance: 0.1 # 目标朝向允许误差 (rad)
+ free_goal_vel: False # 到达目标时是否允许非零速度（True: 允许滑过目标）
+ 
+ # 障碍物相关
+ min_obstacle_dist: 0.1 # 与障碍物的最小允许距离 (m)
+ include_costmap_obstacles: True # 是否包含costmap中的障碍物作为约束
+ costmap_obstacles_behind_robot_dist: 1.5  # 考虑机器人后方障碍物的距离阈值 (m)
+ obstacle_poses_affected: 15   # 单个障碍物最大影响到轨迹上多少个采样点
+ costmap_converter_plugin: "" # costmap转换器插件名称（若使用则填写）
+ costmap_converter_spin_thread: True # 是否在独立线程运行costmap转换器
+ costmap_converter_rate: 5 # costmap转换器运行频率 (Hz)
+ include_dynamic_obstacles: True # 是否包含动态障碍物（如检测到的移动障碍）
+ dynamic_obstacle_inflation_dist: 0.6 # 动态障碍物膨胀距离 (m)
+ 
+ # 优化相关权重与迭代
+ no_inner_iterations: 5 # 内部优化循环次数（每步的局部优化迭代）
+ no_outer_iterations: 4  # 外层优化循环次数（整体迭代次数）
+ optimization_activate: True # 是否启用轨迹优化
+ optimization_verbose: False # 是否输出优化日志
+ penalty_epsilon: 0.05 # 障碍物惩罚的数值稳定项
+ obstacle_cost_exponent: 4 # 障碍物成本随距离的指数
+ weight_max_vel_x: 1  # 线速度接近最大速度的权重（鼓励快速运动）
+ weight_max_vel_theta: 1 # 角速度接近最大角速度的权重
+ weight_acc_lim_x: 1.0 # 加速约束惩罚权重，较低允许更积极加/减速以减少停顿
+ weight_acc_lim_theta: 1  # 角加速度惩罚权重
+ weight_kinematics_nh: 1000 # 非完整转向模型惩罚（保持不可行解极小）
+ weight_kinematics_forward_drive: 1.5 # 优先保持向前驱动（减小不必要的后退/侧移）
+ weight_kinematics_turning_radius: 2.0 # 强化转弯半径约束，帮助贴合预期曲率
+ weight_shortest_path: 10 # 鼓励沿最短路径移动，减小偏离直线的超调
+ weight_obstacle: 100 # 障碍物成本权重（较高以确保安全距离）
+ weight_inflation: 0.2   # 膨胀区成本权重
+ weight_dynamic_obstacle: 10 # 动态障碍物成本权重
+ weight_dynamic_obstacle_inflation: 0.2  # 动态障碍物膨胀成本权重
+ weight_viapoint: 1  # 途经点权重
+ weight_adapt_factor: 2 # 自适应权重因子
+ weight_optimaltime: 0.8 # 目标时间权重（<1使轨迹不那么激进，减少速度波动）
+ 
+ # 同伦类规划（多解平面）
+ enable_homotopy_class_planning: False # 是否启用同伦类规划（多个不同拓扑轨迹）
+ enable_multithreading: True # 是否启用多线程以加速同伦类规划
+ max_number_classes: 5 # 最多保留的同伦类数量
+ selection_cost_hysteresis: 1.0 # 选择成本的滞后项，避免频繁切换拓扑
+ selection_prefer_initial_plan: 0.99 # 更偏向初始解，减少切换带来的抖动
+ selection_obst_cost_scale: 1.0 # 障碍物成本在选择时的缩放因子
+ selection_alternative_time_cost: False # 是否在选择时考虑时间成本
+ 
+ roadmap_graph_no_samples: 15 # 同伦图采样点数
+ roadmap_graph_area_width: 5 # 同伦图采样区域宽度 (m)
+ roadmap_graph_area_length_scale: 1.0 # 同伦图长度缩放
+ h_signature_prescaler: 0.5 # h-signature预缩放系数
+ h_signature_threshold: 0.1 # 同伦签名阈值
+ obstacle_heading_threshold: 0.45 # 障碍物朝向阈值，用于分割拓扑
+ switching_blocking_period: 0.0 # 切换阻塞时间（s），防止频繁切换方案
+ viapoints_all_candidates: True # 是否将所有候选途经点作为viapoints
+ delete_detours_backwards: True # 删除需要后退的绕行路径
+ max_ratio_detours_duration_best_duration: 3.0 # 绕行时长比率阈值
+ visualize_hc_graph: False # 是否可视化同伦类图
+ visualize_with_time_as_z_axis_scale: False # 可视化时是否用时间作为z轴比例
+ 
+ # Recovery（恢复策略）
+ shrink_horizon_backup: True # 发生不可行时缩短轨迹时域作为备选
+ shrink_horizon_min_duration: 10 # 缩短轨迹的最小持续时间 (s)
+ oscillation_recovery: False # 是否启用振荡恢复（检测到振荡时触发）
+ oscillation_v_eps: 0.1 # 速度振荡阈值 (m/s)
+ oscillation_omega_eps: 0.1 # 角速度振荡阈值 (rad/s)
+ oscillation_recovery_min_duration: 10 # 振荡恢复最小持续时间 (s)
+ oscillation_filter_duration: 10 # 振荡检测滤波持续时间 (s)
+ 

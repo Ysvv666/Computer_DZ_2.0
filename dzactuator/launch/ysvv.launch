@@ -1,0 +1,27 @@
+<launch>
+  <!-- <arg name="we_are_blue" default="true"/> -->
+  <!-- type是可执行文件名，name是节点名称 -->
+
+
+  <!-- 底盘驱动 -->
+  <include file="/home/duzhong/dzacs/src/dzactuator/launch/bringup.launch">
+    <!-- <arg name="we_are_blue" value="$(arg we_are_blue)"/> -->
+  </include>
+
+  <!-- 雷达定位，代替amcl定位 !!注意修改地图名称-->
+  <include file="/home/duzhong/dzacs/src/lidar_process/launch/lidar_loc.launch">
+  </include>
+  
+  <!-- 裁判系统 -->
+  <include file="/home/duzhong/dzacs/src/dzactuator/launch/dzjudgment.launch">
+  </include>
+
+  <!-- 物资识别 -->
+  <include file="/home/duzhong/dzacs/src/dzactuator/launch/dzrknnpt.launch">
+  </include>
+
+  <!-- 导航 -->
+  <include file="/home/duzhong/dzacs/src/dzactuator/launch/dznavigation.launch">
+  </include>
+
+</launch>

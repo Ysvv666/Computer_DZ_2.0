@@ -1,0 +1,18 @@
+<!-- Node for merging magnetometer and accelerometer data into a single imu message -->
+<launch>
+  #### Nodelet manager ######################################################
+<!-- 加速了：原始 IMU 数据 /raw(已被映射到 /imu/data_raw，因为madgwick默认订阅/imu/data_raw)的传递速度！ -->
+  <node pkg="nodelet" type="nodelet" name="imu_manager"
+    args="manager" output="screen" />
+
+  #### IMU Driver ###########################################################
+<!-- //Madgwick 计算量比互补滤波大一点！用 nodelet 可以省一点点 CPU、降一点点延迟！ -->
+
+  <node pkg="nodelet" type="nodelet" name="ImuFilterNodelet"
+    args="load imu_filter_madgwick/ImuFilterNodelet imu_manager"
+    output="screen">
+
+    <param name="publish_tf" value="false"/>
+
+  </node>
+</launch>

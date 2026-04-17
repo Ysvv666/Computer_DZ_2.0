@@ -1,0 +1,4 @@
+<launch>
+  <!-- 启动 WSAD 键盘遥控节点 -->
+  <node pkg="teleop_wsad" type="wsad_teleop.py" name="wsad_teleop" output="screen"/>
+</launch>

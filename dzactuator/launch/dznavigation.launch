@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<launch>
+<!-- type是可执行文件名，name是节点名称 -->
+
+
+    <!-- ROS导航核心： move_base ，负责全局和局部路径规划、发送速度指令给底盘-->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+		
+    <!-- 局部规划器 -->
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+    <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> -->
+    <!-- 局部规划器参数 -->
+	  <rosparam command="load" file="$(find dzactuator)/param/teb_local_planner.yaml" />
+    <!-- <rosparam command="load" file="$(find dzactuator)/param/dwa_local_planner.yaml" /> -->    
+    
+    <!-- 全局规划器 -->
+    <rosparam command="load" file="$(find dzactuator)/param/base_global_planner.yaml" />
+    <!-- 全局规划器参数：规划多快、多久规划一次、能不能走未知区域等 -->
+    <rosparam file="$(find dzactuator)/param/move_base_planner.yaml" command="load" /> 
+
+    <!-- 全局和局部成本地图都加载了costmap_common.yaml中的参数，这样就不需要在两个yaml文件中重复定义相同的参数了。 -->
+    <!-- ns表示用 ns 分成两套独立参数 -->
+    <rosparam file="$(find dzactuator)/param/costmap_common.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find dzactuator)/param/costmap_common.yaml" command="load" ns="local_costmap" />
+  
+    <!-- 加载局部代价地图的专用配置：大小、更新频率、坐标系等 -->
+    <rosparam file="$(find dzactuator)/param/local_costmap.yaml" command="load" />
+    <!-- 加载全局代价地图的专用配置 ：地图尺寸、发布频率、膨胀区等-->
+    <rosparam file="$(find dzactuator)/param/global_costmap.yaml" command="load" />
+
+    <!-- 加载move_base的核心配置：规划频率、恢复行为、规划器插件等 -->
+    <rosparam file="$(find dzactuator)/param/move_base_params.yaml" command="load" />
+
+  </node>
+  <!-- 清除代价地图恢复节点，ros官方的，不会出现在src里 -->
+  <node pkg="clear_costmap_recovery" type="costmap_cleaner" name="costmap_cleaner" respawn="true" output="screen"/>
+
+</launch>

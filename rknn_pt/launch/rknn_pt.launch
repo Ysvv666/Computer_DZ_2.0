@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="rknn_pt" type="det_node" name="det_node" output="screen">
+  </node>
+</launch>

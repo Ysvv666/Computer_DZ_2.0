@@ -1,0 +1,70 @@
+TebLocalPlannerROS:
+ 
+ odom_topic: odom                   # 里程计话题名称
+ map_frame: map                     # 地图坐标系名称
+ 
+ # Trajectory
+ teb_autosize: True                 # 是否自动调整时间步长
+ dt_ref: 0.2                         # 参考时间步长 s，控制规划精度
+ dt_hysteresis: 0.04                 # 步长切换滞后 s
+ global_plan_overwrite_orientation: False  # 是否覆盖全局路径的方向
+ max_global_plan_lookahead_dist: 6.0 # 全局路径前视距离 m
+ feasibility_check_no_poses: 5       # 可行性检查的采样点数
+ 
+ # Robot
+ max_vel_x: 0.42                       # 最大线速度 m/s
+ max_vel_trans: 0.42                    # 最大平移速度 m/s（必须与 max_vel_x 相同）
+ max_vel_theta: 0.4                    # 最大角速度 rad/s
+ max_vel_x_backwards: 0.2              # 最大后退速度 m/s
+ max_vel_y: 0.0                        # 侧向速度 m/s
+ 
+ acc_lim_x: 0.078                       # 前进加速度 m/s^2
+ acc_lim_y: 0.08                       # 侧向加速度 m/s^2
+ acc_lim_theta: 0.10                    # 转向加速度 rad/s^2
+ 
+ weight_optimaltime: 1.2                # 时间优化权重，值越大机器人越“赶时间”
+ 
+ wheelbase: 0.10                        # 轮距或轴距 m
+ min_turning_radius: 1.6                # 最小转弯半径 m
+ cmd_angle_instead_rotvel: False        # 是否使用角度命令替代角速度
+ 
+ footprint_model:
+  type: "polygon"                       # 机器人轮廓类型
+  vertices: [[-0.1, -0.1], [-0.1, 0.1], [0.1, 0.1], [0.1, -0.1]]  # 轮廓顶点坐标 m
+
+ xy_goal_tolerance: 0.12                 # 目标位置容差 m
+ yaw_goal_tolerance: 0.1                # 目标角度容差 rad
+ free_goal_vel: False                    # 是否允许在目标处有速度
+ 
+ # Obstacles
+ min_obstacle_dist: 0.1                  # 障碍物最小安全距离 m
+ include_costmap_obstacles: True         # 是否考虑 costmap 中的障碍物
+ costmap_obstacles_behind_robot_dist: 1.5 # 机器人后方考虑障碍物的距离 m
+ obstacle_poses_affected: 15             # 被障碍物影响的路径点数量
+ costmap_converter_plugin: ""            # costmap 转换插件名称
+ costmap_converter_spin_thread: True     # 是否使用独立线程处理 costmap
+ costmap_converter_rate: 4               # 转换器更新频率 Hz
+ include_dynamic_obstacles: True         # 是否考虑动态障碍物
+ dynamic_obstacle_inflation_dist: 0.6    # 动态障碍物膨胀半径 m
+ 
+ # Optimization
+ no_inner_iterations: 5                  # 内循环迭代次数
+ no_outer_iterations: 4                  # 外循环迭代次数
+ optimization_activate: True             # 是否启用优化器
+ optimization_verbose: False             # 是否输出优化日志
+ penalty_epsilon: 0.05                   # 小的惩罚项 epsilon
+ obstacle_cost_exponent: 4               # 障碍物代价指数
+ weight_max_vel_x: 1                      # 最大线速度代价权重
+ weight_max_vel_theta: 1                  # 最大角速度代价权重
+ weight_acc_lim_x: 2                      # 加速度代价权重
+ weight_acc_lim_theta: 1                   # 角加速度代价权重
+ weight_kinematics_nh: 1000               # 非线性运动学约束权重
+ weight_kinematics_forward_drive: 1       # 前向驱动权重
+ weight_kinematics_turning_radius: 1      # 转弯半径约束权重
+ weight_shortest_path: 0                  # 最短路径权重
+ weight_obstacle: 100                     # 静态障碍物代价权重
+ weight_inflation: 0.2                    # 障碍膨胀代价权重
+ weight_dynamic_obstacle: 10              # 动态障碍物代价权重
+ weight_dynamic_obstacle_inflation: 0.2  # 动态障碍物膨胀代价权重
+ weight_viapoint: 1                       # 中间点代价权重
+ weight_adapt_factor: 2                    # 调整系数

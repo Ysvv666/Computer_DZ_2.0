@@ -1,0 +1,68 @@
+<launch>
+      <!-- nodelet 管理器 -->
+      <node pkg="nodelet" type="nodelet" name="imu_manager"
+        args="manager" output="screen" />
+
+      <!-- 互补滤波器（imu_complementary_filter） -->
+      <node pkg="imu_complementary_filter" type="complementary_filter_node"
+        name="complementary_filter_gain_node" output="screen">
+          <param name="do_bias_estimation" value="true"/>
+          <param name="do_adaptive_gain"  value="true"/>
+          <param name="use_mag"           value="false"/>
+          <param name="gain_acc"          value="0.01"/>
+          <param name="gain_mag"          value="0.01"/>
+
+           <!-- remap 告诉滤波节点：“你要的 imu/data_raw 我没有，你直接用 /raw 吧！” -->     
+          <remap from="imu/data_raw" to="/raw"/>
+
+      </node>
+         
+      <arg name="odom_frame_id"  default="odom"/>
+      <arg name="robot_frame_id"  default="base_link"/>
+      <arg name="gyro_frame_id"  default="imu_link"/>
+
+      <!-- <arg name="we_are_blue" default="false"/> -->
+
+      <!-- turn on base_serial 开启底层单片机的控制节点  -->
+      <node pkg="dzactuator" type="dzactuator_node" name="dzactuator" output="screen" respawn="false">
+        <param name="serial_port_name"    type="string" value="/dev/dzactutor"/>  
+        <param name="serial_baud_rate"   type="int"    value="115200"/>
+        <param name="odom_frame_id"      type="string" value="$(arg odom_frame_id)"/> 
+        <param name="robot_frame_id"     type="string" value="$(arg robot_frame_id)"/> 
+        <param name="gyro_frame_id"      type="string" value="$(arg gyro_frame_id)"/> 
+        <param name="calibrate_lineSpeed" value = "0" type = "int"/> 
+        <param name="ticksPerMeter" value = "1380" type = "int"/>      <!-- 1235  -->
+        <param name="ticksPer2PI" value = "1000" type = "int"/>
+        <!-- <param name="we_are_blue" value="$(arg we_are_blue)" type="bool"/> -->
+      </node>
+
+      <include file="$(find rplidar_ros)/launch/rplidar_s3e.launch"/>
+
+      <node pkg="tf" type="static_transform_publisher" name="base_link_to_imulink"
+          args="0.00 0.0 0.08 0.0 0.0  0.0 base_link imu_link 100" >
+      </node> 
+
+      <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser4"
+          args="0.16 0.0 0.105 3.14159 0.0 0.0  base_link laser 100" >
+      </node> 
+
+      <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf" output="screen"  respawn="false">
+        <remap from="imu_data" to="/imu/data"/>
+
+        <param name="output_frame" value="odom"/>
+        <param name="base_footprint_frame" value="base_link"/>
+        <param name="freq" value="30.0"/>
+        <param name="sensor_timeout" value="1.0"/>
+        <param name="odom_used" value="true"/>
+        <param name="imu_used" value="true"/>
+        <param name="vo_used" value="false"/>
+        <param name="gps_used" value="false"/>
+        <param name="debug" value="false"/>
+        <param name="self_diagnose" value="false"/> 
+
+      </node>
+
+  <include file="$(find dzactuator)/launch/dzcamera.launch" />
+
+
+ </launch>

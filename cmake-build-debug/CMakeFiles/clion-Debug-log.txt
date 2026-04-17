@@ -1,0 +1,55 @@
+"C:\Application\CLion 2023.3.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Application/CLion 2023.3.2/bin/ninja/win/x64/ninja.exe" -G Ninja -S C:\Users\duzhong\Desktop\工作文件\渡众文件\新小车工程文件\code\code_orangepi\competition_ws\发布\V1.0（20250306发布）\dzacs\src -B C:\Users\duzhong\Desktop\工作文件\渡众文件\新小车工程文件\code\code_orangepi\competition_ws\发布\V1.0（20250306发布）\dzacs\src\cmake-build-debug
+CMake Deprecation Warning at CMakeLists.txt:4 (cmake_minimum_required):
+  Compatibility with CMake < 3.5 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- The C compiler identification is GNU 13.1.0
+-- The CXX compiler identification is GNU 13.1.0
+-- Detecting C compiler ABI info
+CMake Warning in C:/Users/duzhong/Desktop/工作文件/渡众文件/新小车工程文件/code/code_orangepi/competition_ws/发布/V1.0（20250306发布）/dzacs/src/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-hemmrn/CMakeLists.txt:
+  The object file directory
+
+    C:/Users/duzhong/Desktop/工作文件/渡众文件/新小车工程文件/code/code_orangepi/competition_ws/发布/V1.0（20250306发布）/dzacs/src/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-hemmrn/CMakeFiles/cmTC_6620f.dir/./
+
+  has 237 characters.  The maximum full path to an object file is 250
+  characters (see CMAKE_OBJECT_PATH_MAX).  Object file
+
+    CMakeCCompilerABI.c.obj
+
+  cannot be safely placed under this directory.  The build may not work
+  correctly.
+
+
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Application/CLion 2023.3.2/bin/mingw/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+CMake Warning in C:/Users/duzhong/Desktop/工作文件/渡众文件/新小车工程文件/code/code_orangepi/competition_ws/发布/V1.0（20250306发布）/dzacs/src/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-t0s1ss/CMakeLists.txt:
+  The object file directory
+
+    C:/Users/duzhong/Desktop/工作文件/渡众文件/新小车工程文件/code/code_orangepi/competition_ws/发布/V1.0（20250306发布）/dzacs/src/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-t0s1ss/CMakeFiles/cmTC_e957e.dir/./
+
+  has 237 characters.  The maximum full path to an object file is 250
+  characters (see CMAKE_OBJECT_PATH_MAX).  Object file
+
+    CMakeCXXCompilerABI.cpp.obj
+
+  cannot be safely placed under this directory.  The build may not work
+  correctly.
+
+
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Application/CLion 2023.3.2/bin/mingw/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Error at CMakeLists.txt:22 (message):
+  Search for 'catkin' in workspace failed (catkin_find_pkg catkin
+  C:/Users/duzhong/Desktop/工作文件/渡众文件/新小车工程文件/code/code_orangepi/competition_ws/发布/V1.0（20250306发布）/dzacs/src):
+
+
+-- Configuring incomplete, errors occurred!

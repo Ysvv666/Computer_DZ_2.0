@@ -1,0 +1,105 @@
+TebLocalPlannerROS:
+ 
+ odom_topic: odom # 里程计话题名称，用于获取机器人速度和位姿
+ map_frame: map # 全局坐标系(frame id)，通常为地图坐标系
+ 
+ # Trajectory
+ teb_autosize: True # 自动调整轨迹长度（True: 自动，False: 固定长度）
+ dt_ref: 0.1 # 参考时间步长 (s)，影响轨迹分辨率
+ dt_hysteresis: 0.03 # 时间步长抖动余量，用于稳定dt自动切换
+ global_plan_overwrite_orientation: False # 是否使用全局路径的朝向覆盖局部初始朝向
+ #allow_init_with_backwards_motion:False # 是否允许初始时朝向反向运动（注释表示使用默认）
+ max_global_plan_lookahead_dist: 1.5 # 全局路径前瞻距离 (m)
+ feasibility_check_no_poses: 5 # 可行性检查时采样的位姿数量
+ 
+ # Robot
+ max_vel_x: 0.45 # 前向最大线速度 (m/s)
+ max_vel_y: 0.0 # 侧向最大速度 (m/s)，非全向机器人通常为0
+ max_vel_x_backwards: 0.5 # 后退最大线速度 (m/s)
+ max_vel_theta: 0.16 # 最大角速度 (rad/s)
+ acc_lim_x: 0.1  # 线速度加速度上限 (m/s^2)
+ acc_lim_y: 0.05  # 侧向加速度上限 (m/s^2)
+ acc_lim_theta: 0.07 # 角加速度上限 (rad/s^2)
+ max_vel_trans: 0.45 # 线速度合成限值 (m/s)，应与max_vel_x协调
+
+
+ 
+ wheelbase: 0.10 # 机械臂或车体轮距/轴距 (m)，用于运动学约束
+ min_turning_radius: 0.40 # 最小转弯半径 (m)
+ 
+ cmd_angle_instead_rotvel: False # 是否发送角度命令代替角速度
+ 
+ footprint_model:
+  type: "polygon" # 占位模型类型: polygon/circle/two_circles
+  vertices: [[-0.1, -0.1], [-0.1, 0.1], [0.1, 0.1], [0.1, -0.1]] # 多边形顶点列表, 单位m
+
+ xy_goal_tolerance: 0.1  # 目标点位置容差 (m)
+ yaw_goal_tolerance: 0.1 # 目标朝向容差 (rad)
+ free_goal_vel: False # 到达目标时是否允许非零速度
+ 
+ # Obstacles
+ min_obstacle_dist: 0.1 # 与障碍物保持的最小距离 (m)
+ include_costmap_obstacles: True # 是否将costmap中的障碍物作为约束
+ costmap_obstacles_behind_robot_dist: 1.5  # 考虑机器人后方障碍物的距离 (m)
+ obstacle_poses_affected: 15   # 单个障碍影响轨迹采样点数量
+ costmap_converter_plugin: "" # costmap转换器插件名称（若使用则填写）
+ costmap_converter_spin_thread: True # costmap转换器是否使用独立线程
+ costmap_converter_rate: 5 # costmap转换器频率 (Hz)
+ include_dynamic_obstacles: True # 是否包含动态障碍物
+ dynamic_obstacle_inflation_dist: 0.6 # 动态障碍物膨胀距离 (m)
+ 
+ # Optimization
+ no_inner_iterations: 5 # 内部优化迭代次数
+ no_outer_iterations: 4  # 外部优化迭代次数
+ optimization_activate: True # 是否启用优化
+ optimization_verbose: False # 是否输出优化详细信息
+ penalty_epsilon: 0.05 # 障碍物惩罚的数值稳定项
+ obstacle_cost_exponent: 4 # 障碍物成本随距离的指数
+ weight_max_vel_x: 1  # 接近最大线速度的权重
+ weight_max_vel_theta: 1 # 接近最大角速度的权重
+ weight_acc_lim_x: 2.5 # 对线加速度的惩罚权重
+ weight_acc_lim_theta: 1.5  # 对角加速度的惩罚权重
+ weight_kinematics_nh: 1100 # 非完整运动学惩罚权重
+ weight_kinematics_forward_drive: 0.8 # 鼓励向前行驶的权重
+ weight_kinematics_turning_radius: 0.6 # 转弯半径约束权重
+ weight_shortest_path: 0 # 最短路径权重
+ weight_obstacle: 100 # 障碍物成本权重
+ weight_inflation: 0.2   # 膨胀区成本权重
+ weight_dynamic_obstacle: 10 # 动态障碍物成本权重
+ weight_dynamic_obstacle_inflation: 0.2  # 动态障碍物膨胀成本权重
+ weight_viapoint: 1  # 途经点权重
+ weight_adapt_factor: 2 # 自适应权重因子
+ weight_optimaltime: 1.2 # 轨迹时间权重（>0，值越大越激进）
+ 
+ # Homotopy Class Planner
+ enable_homotopy_class_planning: False # 是否启用同伦类规划
+ enable_multithreading: True # 是否启用多线程
+ max_number_classes: 5 # 最大同伦类数量
+ selection_cost_hysteresis: 1.0 # 选择成本的滞后，防止频繁切换
+ selection_prefer_initial_plan: 0.95 # 优先保留初始计划的倾向
+ selection_obst_cost_scale: 1.0 # 障碍成本缩放因子
+ selection_alternative_time_cost: False # 选择时是否考虑时间成本
+ 
+ roadmap_graph_no_samples: 15 # 同伦图采样点数
+ roadmap_graph_area_width: 5 # 同伦图采样区域宽度 (m)
+ roadmap_graph_area_length_scale: 1.0 # 同伦图长度缩放系数
+ h_signature_prescaler: 0.5 # h-signature 预缩放系数
+ h_signature_threshold: 0.1 # 同伦签名阈值
+ obstacle_heading_threshold: 0.45 # 障碍朝向阈值，用于拓扑分割
+ switching_blocking_period: 0.0 # 切换阻塞时间 (s)
+ viapoints_all_candidates: True # 是否把所有候选点作为viapoints
+ delete_detours_backwards: True # 是否删除需要后退的绕行解
+ max_ratio_detours_duration_best_duration: 3.0 # 绕行时长比阈值
+ visualize_hc_graph: False # 是否可视化同伦类图
+ visualize_with_time_as_z_axis_scale: False # 可视化时用时间作为z轴缩放
+ 
+ # Recovery
+ 
+ shrink_horizon_backup: True # 在不可行时启用缩短时间窗口备选方案
+ shrink_horizon_min_duration: 10 # 缩短轨迹时的最小持续时间 (s)
+ oscillation_recovery: False # 是否启用振荡恢复机制
+ oscillation_v_eps: 0.1 # 线速度振荡阈值 (m/s)
+ oscillation_omega_eps: 0.1 # 角速度振荡阈值 (rad/s)
+ oscillation_recovery_min_duration: 10 # 振荡恢复最小持续时间 (s)
+ oscillation_filter_duration: 10 # 振荡检测滤波窗口时长 (s)
+ 
