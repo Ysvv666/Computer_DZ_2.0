@@ -644,7 +644,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保每次进入该if判断，只记录一次开始时间
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，如果该时间段没锁定到就进入巡航
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，如果该时间段没锁定到就进入巡航
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 1000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -668,7 +668,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 3000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -692,7 +692,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 1000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -716,7 +716,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 3000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -740,7 +740,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1850;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 1000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -764,7 +764,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 2300;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -788,7 +788,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 1300;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -812,7 +812,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 3000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -836,7 +836,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 1000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -860,7 +860,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 1000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -885,7 +885,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 2500;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -909,7 +909,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 1000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -933,7 +933,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 3000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -957,7 +957,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 2500;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
@@ -981,7 +981,7 @@ void turn_on_robot::CaremaMontorControl()
         find_start_flag = 1;// 设置标志位，确保只记录一次
     }
 
-    if((ros::Time::now() - find_start).toSec() <1.0){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
+    if((ros::Time::now() - find_start).toSec() <0.3){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
       moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 1000;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
