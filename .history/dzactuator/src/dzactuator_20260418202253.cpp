@@ -1101,34 +1101,63 @@ void turn_on_robot::callback_offset_center(const std_msgs::Int32MultiArray::Cons
   int cur_x = temp_msg.data[0];
   int cur_y = temp_msg.data[1];
 
-  // ── 目标速度估计：两帧像素偏移差 ─────────────────────────────────────────
-  static int prev_x = 0;
-  static int prev_y = 0;
-  double v_x = cur_x - prev_x;  // 像素/帧
-  double v_y = cur_y - prev_y;
-  prev_x = cur_x;
-  prev_y = cur_y;
+  // ── 1D Kalman filter（水平轴）：状态 [x, vx]，滤波+预测靶子位置 ──────────
+  static double kf_x   = 0.0, kf_vx  = 0.0;
+  static double kf_p00 = 1.0, kf_p01 = 0.0,
+                kf_p10 = 0.0, kf_p11 = 1.0;
+
+  const double Q_x  = 1.0;   // 位置过程噪声
+  const double Q_vx = 8.0;   // 速度过程噪声（靶子加速度不确定性）
+  const double R    = 60.0;  // 观测噪声
+  const int    PRED = 2;     // 预测帧数，越大超前越多，可调
+
+  // 预测步
+  double x_pred  = kf_x + kf_vx;
+  double vx_pred = kf_vx;
+  double p00_p = kf_p00 + kf_p01 + kf_p10 + kf_p11 + Q_x;
+  double p01_p = kf_p01 + kf_p11;
+  double p10_p = kf_p10 + kf_p11;
+  double p11_p = kf_p11 + Q_vx;
+
+  // 更新步
+  double S  = p00_p + R;
+  double K0 = p00_p / S;
+  double K1 = p10_p / S;
+  double innov = cur_x - x_pred;
+
+  // ── 创新门限重置（解决方向切换震荡）────────────────────────────────────────
+  // 当创新值与当前速度反号且幅度超过阈值，说明靶子已反向但 Kalman 未跟上，
+  // 立即将速度估计归零，让预测退化为当前位置，避免往错误方向预测。
+  const double INNOV_GATE = 30.0; // 像素，可调
+  if (kf_vx * innov < 0 && std::abs(innov) > INNOV_GATE) {
+      kf_vx = 0.0;
+      vx_pred = 0.0;
+  }
+
+  kf_x   = x_pred  + K0 * innov;
+  kf_vx  = vx_pred + K1 * innov;
+  kf_p00 = (1 - K0) * p00_p;
+  kf_p01 = (1 - K0) * p01_p;
+  kf_p10 = p10_p - K1 * p00_p;
+  kf_p11 = p11_p - K1 * p01_p;
+
+  // PRED 帧后预测位置
+  int pred_x = static_cast<int>(kf_x + kf_vx * PRED);
 
   // ── 位置指令 ─────────────────────────────────────────────────────────────
-  // OFFSET_X：沿运动方向的固定超前量（伺服单位），补偿系统延迟导致的滞后，可调
-  static constexpr int OFFSET_X = 23;
-  int offset_x = (v_x > 0) ? OFFSET_X : (v_x < 0 ? -OFFSET_X : 0);
+  moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + (cur_y / 2);          // Y轴直接跟
+  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (int)(pred_x / 1.5f); // X轴用卡尔曼预测
 
-  moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + (cur_y / 2);
-  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (cur_x / 2) + offset_x;
+  // ── PD + 速度前馈 ─────────────────────────────────────────────────────────
+  // kf_vx 单位：像素/帧，换算为伺服单位/帧需 /1.5，再 ×50Hz = 伺服速度单位/s
+  // FF_GAIN 可调：每像素/帧速度对应多少伺服速度单位
+  static constexpr double FF_GAIN = 50.0;
+  double ff_speed = std::abs(kf_vx) * FF_GAIN;  // 前馈：随目标速度增大
 
-  // ── 速度输出：P 项 + 速度前馈 ────────────────────────────────────────────
-  // out = Kp * (x_target - x_current) + Kv * v_target
-  // 位置误差 = cur_x/2（像素偏移换算到伺服单位），速度同理
-  static constexpr double KP = 500.0;  // 比例增益，可调
-  static constexpr double KV = 200.0;   // 速度前馈增益，可调
-
-  double speed_0 = std::abs(KP * (cur_y / 2.0) + KV * (v_y / 2.0));
-  double speed_1 = std::abs(KP * (cur_x / 2.0) + KV * (v_x / 2.0));
-
-  moveBaseControl.Speed_0 = clamp(speed_0, 0.0, 3700.0);
-  moveBaseControl.Speed_1 = clamp(speed_1, 0.0, 3700.0);
-
+  moveBaseControl.Speed_0 = CaremaSpeedControl(moveBaseControl.Position_0, curYuntai_feedback_data.Position_0);
+  moveBaseControl.Speed_1 = clamp(
+      CaremaSpeedControl(moveBaseControl.Position_1, curYuntai_feedback_data.Position_1) + ff_speed,
+      0.0, 3700.0);  // PD + 前馈，限幅
 
   //以下发射激光条件可以当然也可以根据需要改，看打靶点和靶子的距离。
   //这个是目标在视野中心的判断条件，偏移量小于10就认为在中心了，stop_point_signal_msg == 1是为了确保在停车点才开火（不然过渡阶段也可能触发开火，跑打打不准的）

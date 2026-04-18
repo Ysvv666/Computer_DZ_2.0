@@ -494,7 +494,6 @@ void MoveBase::callback_selfMaterialNumber(const std_msgs::UInt8MultiArray::Cons
       continue;
     }
 
-    ROS_INFO("%d",point_number);
     const int point_index = static_cast<int>(point_number) - 1;//ת������1 == 0��
     if (point_index >= 0)
     {

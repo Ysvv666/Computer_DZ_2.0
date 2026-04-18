@@ -1073,13 +1073,38 @@ void turn_on_robot::CaremaMontorControl()
       moveBaseControl.Position_1 = 2047;//云台水平初始位置，根据实际情况调整
     }
     else{
-      // moveBaseControl.Position_0 = 1900;//根据靶子高度自行决定      
-      moveBaseControl.Position_0 = 2047;//cjw打靶专用，到时候记得注释掉 然后取消注释上一行
+      moveBaseControl.Position_0 = 1900;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 2047;//云台水平初始位置，根据实际情况调整
     }    //如果到停车点,并且没看到靶子，云台保持初始位置
   }
 }
 
+
+inline int angleToPosition(double deg) {
+    deg = clamp(deg, -179.0, 179.0);
+
+    const double slope_neg = 1023.0 / 90.0;
+    const double slope_pos = 1025.0 / 90.0;
+    double pos = (deg <= 0) ? deg * slope_neg
+                            : deg * slope_pos;
+
+    return static_cast<int>(std::round(pos));
+}
+
+// ─── 云台速度线性插值 ──────────────────────────────────────────────────────
+// 移植自 control.py page_ball_follow() 的自适应速度策略：
+//   v_a = lerp(V_MIN, V_MAX, (|error| - ERR_DEAD) / (ERR_MAX - ERR_DEAD))
+// 优势：无积分、无超调、死区硬停、接近目标自动减速
+static inline int gimbalLerpSpeed(int pos_err,
+                                   int err_dead = 8,
+                                   int err_max  = 180,
+                                   int spd_min  = 150,
+                                   int spd_max  = 3700) {
+    int abs_err = std::abs(pos_err);
+    if (abs_err <= err_dead) return 0;
+    if (abs_err >= err_max)  return spd_max;
+    return spd_min + (spd_max - spd_min) * (abs_err - err_dead) / (err_max - err_dead);
+}
 
 void turn_on_robot::callback_offset_center(const std_msgs::Int32MultiArray::ConstPtr &msg)//触发该回调函数 就是找到靶子了
 {
@@ -1101,34 +1126,21 @@ void turn_on_robot::callback_offset_center(const std_msgs::Int32MultiArray::Cons
   int cur_x = temp_msg.data[0];
   int cur_y = temp_msg.data[1];
 
-  // ── 目标速度估计：两帧像素偏移差 ─────────────────────────────────────────
-  static int prev_x = 0;
-  static int prev_y = 0;
-  double v_x = cur_x - prev_x;  // 像素/帧
-  double v_y = cur_y - prev_y;
-  prev_x = cur_x;
-  prev_y = cur_y;
+  // 基于当前 x 偏移方向的超前补偿：
+  // 靶子偏右(cur_x>0)就额外多往右打，偏左同理，补偿云台响应延迟
+  // LEAD_GAIN 可调：0.0 = 无超前，0.3 = 额外超前30%的偏移量
+  static constexpr float LEAD_GAIN = 0.3f;
+  int pred_x = cur_x + static_cast<int>(cur_x * LEAD_GAIN); // x 方向超前
+  int pred_y = cur_y;                                        // y 方向不超前
 
-  // ── 位置指令 ─────────────────────────────────────────────────────────────
-  // OFFSET_X：沿运动方向的固定超前量（伺服单位），补偿系统延迟导致的滞后，可调
-  static constexpr int OFFSET_X = 23;
-  int offset_x = (v_x > 0) ? OFFSET_X : (v_x < 0 ? -OFFSET_X : 0);
+  moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + (pred_y / 2);//云台Y轴位置
+  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (pred_x / 2);//云台X轴位置（含超前）
 
-  moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + (cur_y / 2);
-  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (cur_x / 2) + offset_x;
-
-  // ── 速度输出：P 项 + 速度前馈 ────────────────────────────────────────────
-  // out = Kp * (x_target - x_current) + Kv * v_target
-  // 位置误差 = cur_x/2（像素偏移换算到伺服单位），速度同理
-  static constexpr double KP = 500.0;  // 比例增益，可调
-  static constexpr double KV = 200.0;   // 速度前馈增益，可调
-
-  double speed_0 = std::abs(KP * (cur_y / 2.0) + KV * (v_y / 2.0));
-  double speed_1 = std::abs(KP * (cur_x / 2.0) + KV * (v_x / 2.0));
-
-  moveBaseControl.Speed_0 = clamp(speed_0, 0.0, 3700.0);
-  moveBaseControl.Speed_1 = clamp(speed_1, 0.0, 3700.0);
-
+  // 线性插值速度：以预测误差驱动，快速响应
+  int err0 = pred_y / 2;
+  int err1 = pred_x / 2;
+  moveBaseControl.Speed_0 = gimbalLerpSpeed(err0);//用线性插值算出y轴速度
+  moveBaseControl.Speed_1 = gimbalLerpSpeed(err1);//用线性插值算出x轴速度
 
   //以下发射激光条件可以当然也可以根据需要改，看打靶点和靶子的距离。
   //这个是目标在视野中心的判断条件，偏移量小于10就认为在中心了，stop_point_signal_msg == 1是为了确保在停车点才开火（不然过渡阶段也可能触发开火，跑打打不准的）
@@ -1149,11 +1161,11 @@ double turn_on_robot::CaremaSpeedControl(int target_pose,int current_pose){
     static double integral = 0.0;
     static double filtered_derivative = 0.0;
 
-    static constexpr double kp =  500.0;              // 稳定的比例增益
+    static constexpr double kp =  700.0;              // 稳定的比例增益
     static constexpr double ki = 0  ;            // 更低的积分增益
     static constexpr double kd = 2;             // 减小的微分增益
     static constexpr double max_speed = 3700.0;    // 最大速度限制
-    static constexpr double sampling_time = 0.01;  // 采样时间 (200Hz)
+    static constexpr double sampling_time = 0.01;  // 采样时间 (10Hz)
 
     // 计算误差
     double error = static_cast<double>(target_pose - current_pose);

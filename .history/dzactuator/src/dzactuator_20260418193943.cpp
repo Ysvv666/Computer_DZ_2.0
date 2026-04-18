@@ -1081,6 +1081,32 @@ void turn_on_robot::CaremaMontorControl()
 }
 
 
+inline int angleToPosition(double deg) {
+    deg = clamp(deg, -179.0, 179.0);
+
+    const double slope_neg = 1023.0 / 90.0;
+    const double slope_pos = 1025.0 / 90.0;
+    double pos = (deg <= 0) ? deg * slope_neg
+                            : deg * slope_pos;
+
+    return static_cast<int>(std::round(pos));
+}
+
+// ─── 云台速度线性插值 ──────────────────────────────────────────────────────
+// 移植自 control.py page_ball_follow() 的自适应速度策略：
+//   v_a = lerp(V_MIN, V_MAX, (|error| - ERR_DEAD) / (ERR_MAX - ERR_DEAD))
+// 优势：无积分、无超调、死区硬停、接近目标自动减速
+static inline int gimbalLerpSpeed(int pos_err,
+                                   int err_dead = 5,
+                                   int err_max  = 180,
+                                   int spd_min  = 100,
+                                   int spd_max  = 4000) {
+    int abs_err = std::abs(pos_err);
+    if (abs_err <= err_dead) return 0;
+    if (abs_err >= err_max)  return spd_max;
+    return spd_min + (spd_max - spd_min) * (abs_err - err_dead) / (err_max - err_dead);
+}
+
 void turn_on_robot::callback_offset_center(const std_msgs::Int32MultiArray::ConstPtr &msg)//触发该回调函数 就是找到靶子了
 {
 //能进这个回调函数里的x，y数据绝对是纯净的靶子坐标数据
@@ -1101,34 +1127,46 @@ void turn_on_robot::callback_offset_center(const std_msgs::Int32MultiArray::Cons
   int cur_x = temp_msg.data[0];
   int cur_y = temp_msg.data[1];
 
-  // ── 目标速度估计：两帧像素偏移差 ─────────────────────────────────────────
-  static int prev_x = 0;
-  static int prev_y = 0;
-  double v_x = cur_x - prev_x;  // 像素/帧
-  double v_y = cur_y - prev_y;
-  prev_x = cur_x;
-  prev_y = cur_y;
+  // ── 1D Kalman filter（水平轴）：状态 [x, vx]，滤波+预测靶子位置 ──────────
+  static double kf_x   = 0.0, kf_vx  = 0.0;
+  static double kf_p00 = 1.0, kf_p01 = 0.0,
+                kf_p10 = 0.0, kf_p11 = 1.0;
+
+  const double Q_x  = 1.0;   // 位置过程噪声
+  const double Q_vx = 8.0;   // 速度过程噪声（靶子加速度不确定性）
+  const double R    = 45.0;  // 观测噪声
+  const int    PRED = 4;     // 预测帧数，越大超前越多，可调
+
+  // 预测步
+  double x_pred  = kf_x + kf_vx;
+  double vx_pred = kf_vx;
+  double p00_p = kf_p00 + kf_p01 + kf_p10 + kf_p11 + Q_x;
+  double p01_p = kf_p01 + kf_p11;
+  double p10_p = kf_p10 + kf_p11;
+  double p11_p = kf_p11 + Q_vx;
+
+  // 更新步
+  double S  = p00_p + R;
+  double K0 = p00_p / S;
+  double K1 = p10_p / S;
+  double innov = cur_x - x_pred;
+  kf_x   = x_pred  + K0 * innov;
+  kf_vx  = vx_pred + K1 * innov;
+  kf_p00 = (1 - K0) * p00_p;
+  kf_p01 = (1 - K0) * p01_p;
+  kf_p10 = p10_p - K1 * p00_p;
+  kf_p11 = p11_p - K1 * p01_p;
+
+  // PRED 帧后预测位置
+  int pred_x = static_cast<int>(kf_x + kf_vx * PRED);
 
   // ── 位置指令 ─────────────────────────────────────────────────────────────
-  // OFFSET_X：沿运动方向的固定超前量（伺服单位），补偿系统延迟导致的滞后，可调
-  static constexpr int OFFSET_X = 23;
-  int offset_x = (v_x > 0) ? OFFSET_X : (v_x < 0 ? -OFFSET_X : 0);
+  moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + (cur_y / 2); // Y轴直接跟
+  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (pred_x / 2);// X轴用卡尔曼预测
 
-  moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + (cur_y / 2);
-  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (cur_x / 2) + offset_x;
-
-  // ── 速度输出：P 项 + 速度前馈 ────────────────────────────────────────────
-  // out = Kp * (x_target - x_current) + Kv * v_target
-  // 位置误差 = cur_x/2（像素偏移换算到伺服单位），速度同理
-  static constexpr double KP = 500.0;  // 比例增益，可调
-  static constexpr double KV = 200.0;   // 速度前馈增益，可调
-
-  double speed_0 = std::abs(KP * (cur_y / 2.0) + KV * (v_y / 2.0));
-  double speed_1 = std::abs(KP * (cur_x / 2.0) + KV * (v_x / 2.0));
-
-  moveBaseControl.Speed_0 = clamp(speed_0, 0.0, 3700.0);
-  moveBaseControl.Speed_1 = clamp(speed_1, 0.0, 3700.0);
-
+  // ── PD 速度控制 ───────────────────────────────────────────────────────────
+  moveBaseControl.Speed_0 = CaremaSpeedControl(moveBaseControl.Position_0, curYuntai_feedback_data.Position_0);
+  moveBaseControl.Speed_1 = CaremaSpeedControl(moveBaseControl.Position_1, curYuntai_feedback_data.Position_1);
 
   //以下发射激光条件可以当然也可以根据需要改，看打靶点和靶子的距离。
   //这个是目标在视野中心的判断条件，偏移量小于10就认为在中心了，stop_point_signal_msg == 1是为了确保在停车点才开火（不然过渡阶段也可能触发开火，跑打打不准的）
@@ -1149,11 +1187,11 @@ double turn_on_robot::CaremaSpeedControl(int target_pose,int current_pose){
     static double integral = 0.0;
     static double filtered_derivative = 0.0;
 
-    static constexpr double kp =  500.0;              // 稳定的比例增益
+    static constexpr double kp =  700.0;              // 稳定的比例增益
     static constexpr double ki = 0  ;            // 更低的积分增益
-    static constexpr double kd = 2;             // 减小的微分增益
+    static constexpr double kd = 3;             // 减小的微分增益
     static constexpr double max_speed = 3700.0;    // 最大速度限制
-    static constexpr double sampling_time = 0.01;  // 采样时间 (200Hz)
+    static constexpr double sampling_time = 0.01;  // 采样时间 (10Hz)
 
     // 计算误差
     double error = static_cast<double>(target_pose - current_pose);

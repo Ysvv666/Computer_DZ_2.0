@@ -1110,18 +1110,14 @@ void turn_on_robot::callback_offset_center(const std_msgs::Int32MultiArray::Cons
   prev_y = cur_y;
 
   // ── 位置指令 ─────────────────────────────────────────────────────────────
-  // OFFSET_X：沿运动方向的固定超前量（伺服单位），补偿系统延迟导致的滞后，可调
-  static constexpr int OFFSET_X = 23;
-  int offset_x = (v_x > 0) ? OFFSET_X : (v_x < 0 ? -OFFSET_X : 0);
-
   moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + (cur_y / 2);
-  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (cur_x / 2) + offset_x;
+  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (cur_x / 2);
 
   // ── 速度输出：P 项 + 速度前馈 ────────────────────────────────────────────
   // out = Kp * (x_target - x_current) + Kv * v_target
   // 位置误差 = cur_x/2（像素偏移换算到伺服单位），速度同理
   static constexpr double KP = 500.0;  // 比例增益，可调
-  static constexpr double KV = 200.0;   // 速度前馈增益，可调
+  static constexpr double KV = 50.0;   // 速度前馈增益，可调
 
   double speed_0 = std::abs(KP * (cur_y / 2.0) + KV * (v_y / 2.0));
   double speed_1 = std::abs(KP * (cur_x / 2.0) + KV * (v_x / 2.0));

@@ -10,7 +10,7 @@ class VoiceSwitchPublisher:
     def __init__(self):
         rospy.init_node('voice_switch_keyboard', anonymous=True)
         self.pub = rospy.Publisher('/voice_switch', UInt8, queue_size=10)
-        self.voice_switch = 40
+        self.voice_switch = 115
         self.rate = rospy.Rate(10)  # 10 Hz
 
         # 设置终端为非阻塞模式，读取键盘

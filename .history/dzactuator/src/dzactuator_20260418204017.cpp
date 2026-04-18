@@ -1110,12 +1110,8 @@ void turn_on_robot::callback_offset_center(const std_msgs::Int32MultiArray::Cons
   prev_y = cur_y;
 
   // ── 位置指令 ─────────────────────────────────────────────────────────────
-  // OFFSET_X：沿运动方向的固定超前量（伺服单位），补偿系统延迟导致的滞后，可调
-  static constexpr int OFFSET_X = 23;
-  int offset_x = (v_x > 0) ? OFFSET_X : (v_x < 0 ? -OFFSET_X : 0);
-
   moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + (cur_y / 2);
-  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (cur_x / 2) + offset_x;
+  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (cur_x / 2);
 
   // ── 速度输出：P 项 + 速度前馈 ────────────────────────────────────────────
   // out = Kp * (x_target - x_current) + Kv * v_target
