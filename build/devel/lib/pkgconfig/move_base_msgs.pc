@@ -1,0 +1,8 @@
+prefix=/home/duzhong/dzacs/src/build/devel
+
+Name: move_base_msgs
+Description: Description of move_base_msgs
+Version: 1.13.0
+Cflags: -I/home/duzhong/dzacs/src/build/devel/include
+Libs: -L${prefix}/lib 
+Requires: 

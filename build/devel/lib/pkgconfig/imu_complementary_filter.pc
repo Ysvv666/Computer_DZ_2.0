@@ -1,0 +1,8 @@
+prefix=/home/duzhong/dzacs/src/build/devel
+
+Name: imu_complementary_filter
+Description: Description of imu_complementary_filter
+Version: 1.2.7
+Cflags: -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/include
+Libs: -L${prefix}/lib -lcomplementary_filter
+Requires: geometry_msgs message_filters nodelet pluginlib roscpp sensor_msgs std_msgs tf

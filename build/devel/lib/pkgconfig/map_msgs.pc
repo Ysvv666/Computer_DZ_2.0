@@ -1,0 +1,8 @@
+prefix=/home/duzhong/dzacs/src/build/devel
+
+Name: map_msgs
+Description: Description of map_msgs
+Version: 1.13.0
+Cflags: -I/home/duzhong/dzacs/src/build/devel/include
+Libs: -L${prefix}/lib 
+Requires: std_msgs sensor_msgs nav_msgs

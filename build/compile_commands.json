@@ -1,0 +1,287 @@
+[
+{
+  "directory": "/home/duzhong/dzacs/src/build/gtest/googlemock",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_main_EXPORTS -isystem /usr/src/googletest/googlemock/include -isystem /usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /usr/src/googletest/googlemock/src/gmock_main.cc",
+  "file": "/usr/src/googletest/googlemock/src/gmock_main.cc"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/gtest/googlemock",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_EXPORTS -I/usr/src/googletest/googlemock/include -I/usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /usr/src/googletest/googlemock/src/gmock-all.cc",
+  "file": "/usr/src/googletest/googlemock/src/gmock-all.cc"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/gtest/googletest",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_main_EXPORTS -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/googletest/googletest/src/gtest_main.cc",
+  "file": "/usr/src/googletest/googletest/src/gtest_main.cc"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/gtest/googletest",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_EXPORTS -I/usr/src/googletest/googletest/include -I/usr/src/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/googletest/googletest/src/gtest-all.cc",
+  "file": "/usr/src/googletest/googletest/src/gtest-all.cc"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/dzjudgment",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"dzjudgment\\\" -I/home/duzhong/dzacs/src/dzjudgment/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp   -std=c++14 -O1 -g   -o CMakeFiles/dzjudgment.dir/src/dzjudgment.cpp.o -c /home/duzhong/dzacs/src/dzjudgment/src/dzjudgment.cpp",
+  "file": "/home/duzhong/dzacs/src/dzjudgment/src/dzjudgment.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/dzjudgment",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"dzjudgment\\\" -I/home/duzhong/dzacs/src/dzjudgment/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp   -std=c++14 -O1 -g   -o CMakeFiles/dzjudgment.dir/src/judgment.cpp.o -c /home/duzhong/dzacs/src/dzjudgment/src/judgment.cpp",
+  "file": "/home/duzhong/dzacs/src/dzjudgment/src/judgment.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/dzsavepath",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"dzsavepath\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -std=gnu++17 -o CMakeFiles/dzsavepath.dir/src/dzsavepath.cpp.o -c /home/duzhong/dzacs/src/dzsavepath/src/dzsavepath.cpp",
+  "file": "/home/duzhong/dzacs/src/dzsavepath/src/dzsavepath.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/dzsavepath",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"dzsavepath\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -std=gnu++17 -o CMakeFiles/dzsavepath.dir/src/savepath.cpp.o -c /home/duzhong/dzacs/src/dzsavepath/src/savepath.cpp",
+  "file": "/home/duzhong/dzacs/src/dzsavepath/src/savepath.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rknn_pt",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rknn_pt\\\" -I/home/duzhong/dzacs/src/rknn_pt/include -I/home/duzhong/dzacs/src/rknn_pt/include/rga -I/home/duzhong/dzacs/src/rknn_pt/include/rknn_api -I/home/duzhong/dzacs/src/rknn_pt/include/det -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -isystem /usr/include/opencv4  -g   -o CMakeFiles/red_target_node.dir/src/red_target_node.cpp.o -c /home/duzhong/dzacs/src/rknn_pt/src/red_target_node.cpp",
+  "file": "/home/duzhong/dzacs/src/rknn_pt/src/red_target_node.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rknn_pt",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rknn_pt\\\" -I/home/duzhong/dzacs/src/rknn_pt/include -I/home/duzhong/dzacs/src/rknn_pt/include/rga -I/home/duzhong/dzacs/src/rknn_pt/include/rknn_api -I/home/duzhong/dzacs/src/rknn_pt/include/det -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -isystem /usr/include/opencv4  -g   -o CMakeFiles/target_node.dir/src/target_node.cpp.o -c /home/duzhong/dzacs/src/rknn_pt/src/target_node.cpp",
+  "file": "/home/duzhong/dzacs/src/rknn_pt/src/target_node.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rknn_pt",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rknn_pt\\\" -I/home/duzhong/dzacs/src/rknn_pt/include -I/home/duzhong/dzacs/src/rknn_pt/include/rga -I/home/duzhong/dzacs/src/rknn_pt/include/rknn_api -I/home/duzhong/dzacs/src/rknn_pt/include/det -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -isystem /usr/include/opencv4  -g   -o CMakeFiles/det_node.dir/src/det_node.cc.o -c /home/duzhong/dzacs/src/rknn_pt/src/det_node.cc",
+  "file": "/home/duzhong/dzacs/src/rknn_pt/src/det_node.cc"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rknn_pt",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rknn_pt\\\" -I/home/duzhong/dzacs/src/rknn_pt/include -I/home/duzhong/dzacs/src/rknn_pt/include/rga -I/home/duzhong/dzacs/src/rknn_pt/include/rknn_api -I/home/duzhong/dzacs/src/rknn_pt/include/det -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -isystem /usr/include/opencv4  -g   -o CMakeFiles/det_node.dir/src/det/postprocess.cc.o -c /home/duzhong/dzacs/src/rknn_pt/src/det/postprocess.cc",
+  "file": "/home/duzhong/dzacs/src/rknn_pt/src/det/postprocess.cc"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rknn_pt",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rknn_pt\\\" -I/home/duzhong/dzacs/src/rknn_pt/include -I/home/duzhong/dzacs/src/rknn_pt/include/rga -I/home/duzhong/dzacs/src/rknn_pt/include/rknn_api -I/home/duzhong/dzacs/src/rknn_pt/include/det -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -isystem /usr/include/opencv4  -g   -o CMakeFiles/det_node.dir/src/det/preprocess.cc.o -c /home/duzhong/dzacs/src/rknn_pt/src/det/preprocess.cc",
+  "file": "/home/duzhong/dzacs/src/rknn_pt/src/det/preprocess.cc"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rknn_pt",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rknn_pt\\\" -I/home/duzhong/dzacs/src/rknn_pt/include -I/home/duzhong/dzacs/src/rknn_pt/include/rga -I/home/duzhong/dzacs/src/rknn_pt/include/rknn_api -I/home/duzhong/dzacs/src/rknn_pt/include/det -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -isystem /usr/include/opencv4  -g   -o CMakeFiles/det_node.dir/src/det/rkpt.cc.o -c /home/duzhong/dzacs/src/rknn_pt/src/det/rkpt.cc",
+  "file": "/home/duzhong/dzacs/src/rknn_pt/src/det/rkpt.cc"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNodeClient.dir/src/client.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/src/client.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/src/client.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/src/node.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/src/node.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/src/node.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/arch/linux/net_serial.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/arch/linux/net_serial.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/arch/linux/net_serial.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/arch/linux/net_socket.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/arch/linux/net_socket.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/arch/linux/net_socket.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/arch/linux/timer.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/arch/linux/timer.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/arch/linux/timer.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/dataunpacker/dataunpacker.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/dataunpacker/dataunpacker.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/dataunpacker/dataunpacker.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/dataunpacker/unpacker/handler_capsules.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/dataunpacker/unpacker/handler_capsules.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/dataunpacker/unpacker/handler_capsules.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/dataunpacker/unpacker/handler_hqnode.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/dataunpacker/unpacker/handler_normalnode.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/hal/thread.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/hal/thread.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/hal/thread.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/rplidar_driver.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/rplidar_driver.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/rplidar_driver.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/sl_async_transceiver.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_async_transceiver.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_async_transceiver.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/sl_crc.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_crc.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_crc.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/sl_lidar_driver.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_lidar_driver.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_lidar_driver.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/sl_lidarprotocol_codec.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_lidarprotocol_codec.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_lidarprotocol_codec.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/sl_serial_channel.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_serial_channel.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_serial_channel.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/sl_tcp_channel.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_tcp_channel.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_tcp_channel.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/rplidar_ros",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rplidar_ros\\\" -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/include -I/home/duzhong/dzacs/src/rplidar_ros/./sdk/src -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -std=c++11  -O3 -DNDEBUG   -o CMakeFiles/rplidarNode.dir/sdk/src/sl_udp_channel.cpp.o -c /home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_udp_channel.cpp",
+  "file": "/home/duzhong/dzacs/src/rplidar_ros/sdk/src/sl_udp_channel.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/dzactuator",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"dzactuator\\\" -I/home/duzhong/dzacs/src/dzactuator/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/home/duzhong/dzacs/src/dzactuator/include/dzactuator  -g   -g -std=c++11 -o CMakeFiles/dzactuator_node.dir/src/dzactuator.cpp.o -c /home/duzhong/dzacs/src/dzactuator/src/dzactuator.cpp",
+  "file": "/home/duzhong/dzacs/src/dzactuator/src/dzactuator.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/dzactuator",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"dzactuator\\\" -I/home/duzhong/dzacs/src/dzactuator/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/home/duzhong/dzacs/src/dzactuator/include/dzactuator  -g   -g -std=c++11 -o CMakeFiles/dzactuator_node.dir/src/Quaternion_Solution.cpp.o -c /home/duzhong/dzacs/src/dzactuator/src/Quaternion_Solution.cpp",
+  "file": "/home/duzhong/dzacs/src/dzactuator/src/Quaternion_Solution.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_complementary_filter",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_complementary_filter\\\" -Dcomplementary_filter_EXPORTS -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g -fPIC   -o CMakeFiles/complementary_filter.dir/src/complementary_filter.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/src/complementary_filter.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/src/complementary_filter.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_complementary_filter",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_complementary_filter\\\" -Dcomplementary_filter_EXPORTS -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g -fPIC   -o CMakeFiles/complementary_filter.dir/src/complementary_filter_ros.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/src/complementary_filter_ros.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/src/complementary_filter_ros.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_complementary_filter",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_complementary_filter\\\" -Dcomplementary_filter_nodelet_EXPORTS -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g -fPIC   -o CMakeFiles/complementary_filter_nodelet.dir/src/complementary_filter_nodelet.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/src/complementary_filter_nodelet.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/src/complementary_filter_nodelet.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_complementary_filter",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_complementary_filter\\\" -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/complementary_filter_node.dir/src/complementary_filter_node.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/src/complementary_filter_node.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_complementary_filter/src/complementary_filter_node.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/lidar_process",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"lidar_process\\\" -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/opencv4  -g   -o CMakeFiles/lidar_filter_node.dir/src/lidar_filter_node.cpp.o -c /home/duzhong/dzacs/src/lidar_process/src/lidar_filter_node.cpp",
+  "file": "/home/duzhong/dzacs/src/lidar_process/src/lidar_filter_node.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/lidar_process",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"lidar_process\\\" -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -o CMakeFiles/lidar_loc.dir/src/lidar_loc.cpp.o -c /home/duzhong/dzacs/src/lidar_process/src/lidar_loc.cpp",
+  "file": "/home/duzhong/dzacs/src/lidar_process/src/lidar_loc.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_filter_madgwick",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_filter_madgwick\\\" -Dimu_filter_EXPORTS -I/home/duzhong/dzacs/src/build/devel/include -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -g -fPIC   -o CMakeFiles/imu_filter.dir/src/imu_filter.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/imu_filter.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/imu_filter.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_filter_madgwick",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_filter_madgwick\\\" -Dimu_filter_EXPORTS -I/home/duzhong/dzacs/src/build/devel/include -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -g -fPIC   -o CMakeFiles/imu_filter.dir/src/imu_filter_ros.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/imu_filter_ros.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/imu_filter_ros.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_filter_madgwick",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_filter_madgwick\\\" -Dimu_filter_EXPORTS -I/home/duzhong/dzacs/src/build/devel/include -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -g -fPIC   -o CMakeFiles/imu_filter.dir/src/stateless_orientation.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/stateless_orientation.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/stateless_orientation.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_filter_madgwick",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_filter_madgwick\\\" -Dimu_filter_nodelet_EXPORTS -I/home/duzhong/dzacs/src/build/devel/include -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -g -fPIC   -o CMakeFiles/imu_filter_nodelet.dir/src/imu_filter_nodelet.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/imu_filter_nodelet.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/imu_filter_nodelet.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_filter_madgwick",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_filter_madgwick\\\" -I/home/duzhong/dzacs/src/build/devel/include -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3  -g   -o CMakeFiles/imu_filter_node.dir/src/imu_filter_node.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/imu_filter_node.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/src/imu_filter_node.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_filter_madgwick",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_filter_madgwick\\\" -I/home/duzhong/dzacs/src/build/devel/include -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -g   -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/imu_filter_madgwick-madgwick_test.dir/test/stateless_orientation_test.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/test/stateless_orientation_test.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/test/stateless_orientation_test.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/imu_filter_madgwick",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_SYSTEM_DYN_LINK -DBOOST_THREAD_DYN_LINK -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"imu_filter_madgwick\\\" -I/home/duzhong/dzacs/src/build/devel/include -I/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -g   -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/imu_filter_madgwick-madgwick_test.dir/test/madgwick_test.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/test/madgwick_test.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/imu_filter_madgwick/test/madgwick_test.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_KEYWORDS -DQT_WIDGETS_LIB -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rviz_imu_plugin\\\" -Drviz_imu_plugin_EXPORTS -I/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin/rviz_imu_plugin_autogen/include -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/usr/include/OGRE/Overlay -I/usr/include/OGRE -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++  -g -fPIC   -fPIC -o CMakeFiles/rviz_imu_plugin.dir/rviz_imu_plugin_autogen/mocs_compilation.cpp.o -c /home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin/rviz_imu_plugin_autogen/mocs_compilation.cpp",
+  "file": "/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin/rviz_imu_plugin_autogen/mocs_compilation.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_KEYWORDS -DQT_WIDGETS_LIB -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rviz_imu_plugin\\\" -Drviz_imu_plugin_EXPORTS -I/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin/rviz_imu_plugin_autogen/include -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/usr/include/OGRE/Overlay -I/usr/include/OGRE -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++  -g -fPIC   -fPIC -o CMakeFiles/rviz_imu_plugin.dir/src/imu_acc_visual.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/rviz_imu_plugin/src/imu_acc_visual.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/rviz_imu_plugin/src/imu_acc_visual.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_KEYWORDS -DQT_WIDGETS_LIB -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rviz_imu_plugin\\\" -Drviz_imu_plugin_EXPORTS -I/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin/rviz_imu_plugin_autogen/include -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/usr/include/OGRE/Overlay -I/usr/include/OGRE -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++  -g -fPIC   -fPIC -o CMakeFiles/rviz_imu_plugin.dir/src/imu_axes_visual.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/rviz_imu_plugin/src/imu_axes_visual.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/rviz_imu_plugin/src/imu_axes_visual.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_KEYWORDS -DQT_WIDGETS_LIB -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rviz_imu_plugin\\\" -Drviz_imu_plugin_EXPORTS -I/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin/rviz_imu_plugin_autogen/include -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/usr/include/OGRE/Overlay -I/usr/include/OGRE -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++  -g -fPIC   -fPIC -o CMakeFiles/rviz_imu_plugin.dir/src/imu_display.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/rviz_imu_plugin/src/imu_display.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/rviz_imu_plugin/src/imu_display.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_KEYWORDS -DQT_WIDGETS_LIB -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"rviz_imu_plugin\\\" -Drviz_imu_plugin_EXPORTS -I/home/duzhong/dzacs/src/build/imu_tools-noetic/rviz_imu_plugin/rviz_imu_plugin_autogen/include -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/usr/include/OGRE/Overlay -I/usr/include/OGRE -isystem /usr/include/aarch64-linux-gnu/qt5 -isystem /usr/include/aarch64-linux-gnu/qt5/QtWidgets -isystem /usr/include/aarch64-linux-gnu/qt5/QtGui -isystem /usr/include/aarch64-linux-gnu/qt5/QtCore -isystem /usr/lib/aarch64-linux-gnu/qt5/mkspecs/linux-g++  -g -fPIC   -fPIC -o CMakeFiles/rviz_imu_plugin.dir/src/imu_orientation_visual.cpp.o -c /home/duzhong/dzacs/src/imu_tools-noetic/rviz_imu_plugin/src/imu_orientation_visual.cpp",
+  "file": "/home/duzhong/dzacs/src/imu_tools-noetic/rviz_imu_plugin/src/imu_orientation_visual.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/clear_costmap_recovery",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"clear_costmap_recovery\\\" -Dclear_costmap_recovery_EXPORTS -I/home/duzhong/dzacs/src/clear_costmap_recovery/include -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/home/duzhong/dzacs/src/clear_costmap_recovery/test  -g -fPIC   -o CMakeFiles/clear_costmap_recovery.dir/src/clear_costmap_recovery.cpp.o -c /home/duzhong/dzacs/src/clear_costmap_recovery/src/clear_costmap_recovery.cpp",
+  "file": "/home/duzhong/dzacs/src/clear_costmap_recovery/src/clear_costmap_recovery.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/clear_costmap_recovery",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"clear_costmap_recovery\\\" -I/home/duzhong/dzacs/src/clear_costmap_recovery/include -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/home/duzhong/dzacs/src/clear_costmap_recovery/test  -g   -o CMakeFiles/costmap_cleaner.dir/src/costmap_cleaner.cpp.o -c /home/duzhong/dzacs/src/clear_costmap_recovery/src/costmap_cleaner.cpp",
+  "file": "/home/duzhong/dzacs/src/clear_costmap_recovery/src/costmap_cleaner.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/clear_costmap_recovery",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"clear_costmap_recovery\\\" -I/home/duzhong/dzacs/src/clear_costmap_recovery/include -I/home/duzhong/dzacs/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/home/duzhong/dzacs/src/clear_costmap_recovery/test -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -g   -DGTEST_HAS_PTHREAD=1 -o CMakeFiles/clear_tester.dir/test/clear_tester.cpp.o -c /home/duzhong/dzacs/src/clear_costmap_recovery/test/clear_tester.cpp",
+  "file": "/home/duzhong/dzacs/src/clear_costmap_recovery/test/clear_tester.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/move_base",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"move_base\\\" -Dmove_base_EXPORTS -Dqh_QHpointer -DvtkRenderingContext2D_AUTOINIT=\"1(vtkRenderingContextOpenGL2)\" -DvtkRenderingCore_AUTOINIT=\"3(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingOpenGL2)\" -I/home/duzhong/dzacs/src/build/devel/include -I/usr/include/vtk-7.1 -I/usr/include/freetype2 -I/home/duzhong/dzacs/src/move_base/include -I/home/duzhong/dzacs/src/clear_costmap_recovery/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/usr/include/pcl-1.10 -I/usr/include/ni -I/usr/include/openni2    -g -fPIC   -o CMakeFiles/move_base.dir/src/move_base.cpp.o -c /home/duzhong/dzacs/src/move_base/src/move_base.cpp",
+  "file": "/home/duzhong/dzacs/src/move_base/src/move_base.cpp"
+},
+{
+  "directory": "/home/duzhong/dzacs/src/build/move_base",
+  "command": "/usr/bin/aarch64-linux-gnu-g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"move_base\\\" -Dqh_QHpointer -DvtkRenderingContext2D_AUTOINIT=\"1(vtkRenderingContextOpenGL2)\" -DvtkRenderingCore_AUTOINIT=\"3(vtkInteractionStyle,vtkRenderingFreeType,vtkRenderingOpenGL2)\" -I/home/duzhong/dzacs/src/build/devel/include -I/usr/include/vtk-7.1 -I/usr/include/freetype2 -I/home/duzhong/dzacs/src/move_base/include -I/home/duzhong/dzacs/src/clear_costmap_recovery/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/usr/include/pcl-1.10 -I/usr/include/ni -I/usr/include/openni2    -g   -o CMakeFiles/move_base_node.dir/src/move_base_node.cpp.o -c /home/duzhong/dzacs/src/move_base/src/move_base_node.cpp",
+  "file": "/home/duzhong/dzacs/src/move_base/src/move_base_node.cpp"
+}
+]

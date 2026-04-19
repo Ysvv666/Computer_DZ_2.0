@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20260419-0730-Experimental"
+	Name="duzhong"
+	Generator="ctest-3.16.3"
+	CompilerName="/usr/bin/aarch64-linux-gnu-g++"
+	CompilerVersion="9.4.0"
+	OSName="Linux"
+	Hostname="duzhong"
+	OSRelease="5.10.160-rockchip-rk3588"
+	OSVersion="#1.0.6 SMP Tue Nov 12 22:34:20 CST 2024"
+	OSPlatform="aarch64"
+	Is64Bits="1"
+	VendorString=""
+	VendorID="Unknown Manufacturer"
+	FamilyID="8"
+	ModelID="0"
+	ProcessorCacheSize="0"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="1"
+	TotalVirtualMemory="7985"
+	TotalPhysicalMemory="15970"
+	LogicalProcessorsPerPhysical="8"
+	ProcessorClockFrequency="0"
+	>
+	<Testing>
+		<StartDateTime>Apr 19 15:45 CST</StartDateTime>
+		<StartTestTime>1776584704</StartTestTime>
+		<TestList/>
+		<EndDateTime>Apr 19 15:45 CST</EndDateTime>
+		<EndTestTime>1776584704</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

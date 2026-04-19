@@ -1,0 +1,8 @@
+prefix=/home/duzhong/dzacs/src/build/devel
+
+Name: lidar_process
+Description: Description of lidar_process
+Version: 0.1.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: cv_bridge geometry_msgs move_base_msgs nav_msgs roscpp rospy sensor_msgs std_msgs tf

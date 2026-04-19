@@ -1,0 +1,290 @@
+{
+	"backtrace" : 4,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"include",
+			"generate_messages",
+			"add_dependencies"
+		],
+		"files" : 
+		[
+			"build/navigation_msgs/map_msgs/cmake/map_msgs-genmsg.cmake",
+			"/opt/ros/noetic/share/genmsg/cmake/genmsg-extras.cmake",
+			"navigation_msgs/map_msgs/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 29,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 307,
+				"parent" : 1
+			},
+			{
+				"file" : 0,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 460,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 660,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 663,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 473,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 475,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 471,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 469,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 479,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 467,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 481,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 483,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 477,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 666,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 485,
+				"parent" : 3
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "std_msgs_generate_messages_nodejs::@aa31175cc99b23b44826"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "sensor_msgs_generate_messages_nodejs::@3a9eb7ffd83753627512"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "_map_msgs_generate_messages_check_deps_ProjectedMap::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "_map_msgs_generate_messages_check_deps_GetMapROI::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "_map_msgs_generate_messages_check_deps_ProjectedMapInfo::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "_map_msgs_generate_messages_check_deps_PointCloud2Update::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 11,
+			"id" : "_map_msgs_generate_messages_check_deps_GetPointMap::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 12,
+			"id" : "_map_msgs_generate_messages_check_deps_OccupancyGridUpdate::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 13,
+			"id" : "_map_msgs_generate_messages_check_deps_ProjectedMapsInfo::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 14,
+			"id" : "_map_msgs_generate_messages_check_deps_SaveMap::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 15,
+			"id" : "_map_msgs_generate_messages_check_deps_GetPointMapROI::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 16,
+			"id" : "nav_msgs_generate_messages_nodejs::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 17,
+			"id" : "_map_msgs_generate_messages_check_deps_SetMapProjections::@d4b8e12e0be4eb1dec39"
+		}
+	],
+	"id" : "map_msgs_generate_messages_nodejs::@d4b8e12e0be4eb1dec39",
+	"name" : "map_msgs_generate_messages_nodejs",
+	"paths" : 
+	{
+		"build" : "navigation_msgs/map_msgs",
+		"source" : "navigation_msgs/map_msgs"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 4,
+			"isGenerated" : true,
+			"path" : "build/navigation_msgs/map_msgs/CMakeFiles/map_msgs_generate_messages_nodejs",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/navigation_msgs/map_msgs/CMakeFiles/map_msgs_generate_messages_nodejs.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/msg/OccupancyGridUpdate.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/msg/PointCloud2Update.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/msg/ProjectedMapInfo.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/msg/ProjectedMap.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/srv/GetMapROI.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/srv/GetPointMapROI.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/srv/GetPointMap.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/srv/ProjectedMapsInfo.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/srv/SaveMap.js.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/share/gennodejs/ros/map_msgs/srv/SetMapProjections.js.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

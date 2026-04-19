@@ -1,0 +1,304 @@
+{
+	"backtrace" : 4,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"include",
+			"generate_messages",
+			"add_dependencies"
+		],
+		"files" : 
+		[
+			"build/navigation_msgs/map_msgs/cmake/map_msgs-genmsg.cmake",
+			"/opt/ros/noetic/share/genmsg/cmake/genmsg-extras.cmake",
+			"navigation_msgs/map_msgs/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 29,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 307,
+				"parent" : 1
+			},
+			{
+				"file" : 0,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 565,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 678,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 681,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 578,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 580,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 684,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 576,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 574,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 584,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 572,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 586,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 588,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 582,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 590,
+				"parent" : 3
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "std_msgs_generate_messages_py::@aa31175cc99b23b44826"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "sensor_msgs_generate_messages_py::@3a9eb7ffd83753627512"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "_map_msgs_generate_messages_check_deps_ProjectedMap::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "_map_msgs_generate_messages_check_deps_GetMapROI::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "nav_msgs_generate_messages_py::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "_map_msgs_generate_messages_check_deps_ProjectedMapInfo::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 11,
+			"id" : "_map_msgs_generate_messages_check_deps_PointCloud2Update::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 12,
+			"id" : "_map_msgs_generate_messages_check_deps_GetPointMap::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 13,
+			"id" : "_map_msgs_generate_messages_check_deps_OccupancyGridUpdate::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 14,
+			"id" : "_map_msgs_generate_messages_check_deps_ProjectedMapsInfo::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 15,
+			"id" : "_map_msgs_generate_messages_check_deps_SaveMap::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 16,
+			"id" : "_map_msgs_generate_messages_check_deps_GetPointMapROI::@d4b8e12e0be4eb1dec39"
+		},
+		{
+			"backtrace" : 17,
+			"id" : "_map_msgs_generate_messages_check_deps_SetMapProjections::@d4b8e12e0be4eb1dec39"
+		}
+	],
+	"id" : "map_msgs_generate_messages_py::@d4b8e12e0be4eb1dec39",
+	"name" : "map_msgs_generate_messages_py",
+	"paths" : 
+	{
+		"build" : "navigation_msgs/map_msgs",
+		"source" : "navigation_msgs/map_msgs"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 4,
+			"isGenerated" : true,
+			"path" : "build/navigation_msgs/map_msgs/CMakeFiles/map_msgs_generate_messages_py",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/navigation_msgs/map_msgs/CMakeFiles/map_msgs_generate_messages_py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/msg/_OccupancyGridUpdate.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/msg/_PointCloud2Update.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/msg/_ProjectedMapInfo.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/msg/_ProjectedMap.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/srv/_GetMapROI.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/srv/_GetPointMapROI.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/srv/_GetPointMap.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/srv/_ProjectedMapsInfo.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/srv/_SaveMap.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/srv/_SetMapProjections.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/msg/__init__.py.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/lib/python3/dist-packages/map_msgs/srv/__init__.py.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

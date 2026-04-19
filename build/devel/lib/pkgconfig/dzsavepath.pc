@@ -1,0 +1,8 @@
+prefix=/home/duzhong/dzacs/src/build/devel
+
+Name: dzsavepath
+Description: Description of dzsavepath
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp rospy std_msgs message_runtime

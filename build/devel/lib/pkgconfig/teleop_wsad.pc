@@ -1,0 +1,8 @@
+prefix=/home/duzhong/dzacs/src/build/devel
+
+Name: teleop_wsad
+Description: Description of teleop_wsad
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
