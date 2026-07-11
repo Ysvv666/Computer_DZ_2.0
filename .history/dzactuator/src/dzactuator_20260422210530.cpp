@@ -13,28 +13,6 @@ sensor_msgs::Imu Mpu6050;
 
 namespace {
 
-constexpr double kPtzAlphaX = 0.60;
-constexpr double kPtzAlphaY = 0.25;
-constexpr double kPtzAlphaVel = 0.22;
-constexpr double kPtzLead = 2.45;
-constexpr double kPtzPosGainX = 0.70;
-constexpr double kPtzPosGainY = 0.50;
-constexpr double kPtzKpX = 18.5;
-constexpr double kPtzKpY = 28.0;
-constexpr double kPtzKv = 4.5;
-constexpr double kPtzMaxSpeedX = 520.0;
-constexpr double kPtzMaxSpeedY = 520.0;
-constexpr double kPtzCenterDc = 0.16;
-constexpr double kPtzShotInterval = 0.08;
-constexpr double kPtzBoxMin = 20.0;
-constexpr double kPtzBoxAtConf65 = 40.0;
-constexpr double kPtzBoxAtConf100 = 80.0;
-constexpr double kPtzBuchanK = 0.32;
-constexpr double kPtzBuchanB = -14.0;
-constexpr double kPtzDebugPeriod = 0.25;
-constexpr int kPtzMaxStepX = 64;
-constexpr int kPtzMaxStepY = 24;
-
 void PublishPtzPose(ros::NodeHandle &nh, const curYuntai_feedback &feedback)
 {
   static ros::Publisher pub_ptz_pose = nh.advertise<geometry_msgs::Twist>("/ptz_pose", 10);
@@ -254,10 +232,9 @@ void turn_on_robot::Control()
   Robot_Pos.Z = 0;
   ros::Time current_time, last_time;
   last_time = ros::Time::now();
-  ros::Rate rate(20);//发送数据包的周期，单位毫秒
+  ros::Rate rate(50);
   while (ros::ok())
   {
-    ros::Time send_start = ros::Time::now();
     ros::spinOnce(); // The loop waits for the callback function //循环等待回调函数
     if (true == Get_Sensor_Data_New()) // The serial port reads and verifies the data sent by the lower computer, and then the data is converted to international units
     // 通过串口读取并校验下位机发送过来的数据，然后数据转换为国际单位
@@ -298,7 +275,6 @@ void turn_on_robot::Control()
       Publish_Battery_Percentage(); // Pub the topic of power supply voltage //发布电源电量百分比话题
       CaremaMontorControl();        // 云台相机控制策略
       sendCarInfoKernel();          // 向STM32发送控制指令
-      //ROS_INFO("SEND_JIANGE=%f\n",(ros::Time::now() - send_start).toSec() );
 
       PublishPtzPose(n, curYuntai_feedback_data);
       PublishCameraTf(curYuntai_feedback_data);
@@ -579,8 +555,7 @@ void turn_on_robot::callback_pt_det_topic(const std_msgs::Int32MultiArray::Const
     int current_id = pt_det_msg.data[2];
 
     //**************累计所有id的连续出现次数***************/
-    //物品
-    if(current_id == last_id && current_id >= 101 && current_id <= 115 && msg->data[3]>70) {
+    if(current_id == last_id) {
         msg_trust_count++;
     } else {
         msg_trust_count = 1;  // 从1开始计数
@@ -588,15 +563,15 @@ void turn_on_robot::callback_pt_det_topic(const std_msgs::Int32MultiArray::Const
     }
 
     // 次数未到，不进入后续处理
-    if(msg_trust_count <= 4 && current_id >= 101 && current_id <= 115) {//判断4次物资相同才认为看到同一个东西（没识别到也同理）
-        return;//这边是为了提高靶子的锁定稳定性,靶子不需要连续识别十次
+    if(msg_trust_count <= 5 && current_id >= 101 && current_id <= 115) {//判断五次物资相同才认为看到同一个东西（没识别到也同理）
+        return;//这边是为了提高靶子的锁定稳定性,靶子不需要连续识别五次
     }
 
     // ROS_INFO("pt_det_msg.data[2] = %d", pt_det_msg.data[2]);//打印id
 
  //*********************识别到靶子**********************//
-    if((current_id == 116 || current_id == 117 || current_id == 118) && current_road_point_index==16)//打靶点才打靶
-    // if(current_id == 116 || current_id == 117 || current_id == 118)//打靶点才打靶cjw打靶专用，调试打靶的时候注释掉上一行，取消注释这一行
+    //if((current_id == 116 || current_id == 117 || current_id == 118) && current_road_point_index==16)//打靶点才打靶
+     if(current_id == 116 || current_id == 117 || current_id == 118)//打靶点才打靶cjw打靶专用，调试打靶的时候注释掉上一行，取消注释这一行
     
     { //识别到id分别对应redgoal,unhitgoal(bluegoal)，goal(没亮)
 
@@ -605,12 +580,12 @@ void turn_on_robot::callback_pt_det_topic(const std_msgs::Int32MultiArray::Const
     }
 
     //*********************识别到物资**********************//
-    else if(current_id >= 101 && current_id <= 115 && stop_point_signal_msg == 1) //在停止点识别到物资
+    else if(current_id >= 101 && current_id <= 115) //识别到物资
     {     
           find_center = false;
-          // if(stop_point_signal_msg == 1){//确保此时是停止状态，防止行进过程中误报
+          if(stop_point_signal_msg == 1){//确保此时是停止状态，防止行进过程中误报
                 //**************判断置信度ysvv***************/
-                // if (msg->data[3]>65){ //如果置信度大于xx%  这个值根据现场情况调节
+                if (msg->data[3]>65){ //如果置信度大于xx%  这个值根据现场情况调节
                     // if( After_ZhuanYunTai_flag==1){//此时是云台转过头之后的，确保找到真的物资
                         ROS_INFO("pt_det_msg.data[2] = %d,ZHI_XIN_DU=%d", pt_det_msg.data[2], msg->data[3]);
                         find_wuzi_flag = 1;
@@ -624,8 +599,8 @@ void turn_on_robot::callback_pt_det_topic(const std_msgs::Int32MultiArray::Const
                         pub_voice_switch.publish(voice_msg);        //语音播报     
                         // After_ZhuanYunTai_flag=0;
                     // }
-                // }置信度判断移到上面了
-          // }
+                }
+          }
     }
      //*********************啥也没识别到**********************//
     else if(current_id == -1)
@@ -756,7 +731,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1920;
-      CaremaMontorControl_Move(-1, 80, 1, 300, 1800, 3000, 1000);
+      CaremaMontorControl_Move(-1, 80, 1, 300, 1800, 3000, 3000);
     }
   }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -780,7 +755,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-       CaremaMontorControl_Move(1, 80, 1, 2047, 4000, 3000, 1000);
+       CaremaMontorControl_Move(1, 80, 1, 2047, 4000, 3000, 3000);    
     }
   }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -804,7 +779,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-      CaremaMontorControl_Move(-1, 80, 1, 100, 2000, 3000, 1000);
+      CaremaMontorControl_Move(-1, 80, 1, 100, 2000, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -828,7 +803,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-       CaremaMontorControl_Move(1, 80, 1, 2047, 4000, 3000, 1000);
+       CaremaMontorControl_Move(1, 80, 1, 2047, 4000, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -852,7 +827,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-      CaremaMontorControl_Move(-1, 80, 1, 500, 1500, 3000, 1000);
+      CaremaMontorControl_Move(-1, 80, 1, 100, 2000, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -876,7 +851,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-       CaremaMontorControl_Move(1, 80, 1, 2047, 4000, 3000, 1000);
+       CaremaMontorControl_Move(1, 80, 1, 2047, 4000, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -900,7 +875,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-      CaremaMontorControl_Move(-1, 80, 1, 1500, 2000, 3000, 1000);
+      CaremaMontorControl_Move(-1, 80, 1, 1500, 2000, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -924,7 +899,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-       CaremaMontorControl_Move(1, 80, 1, 2047, 4000, 3000, 1000);
+       CaremaMontorControl_Move(1, 80, 1, 2047, 4000, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -948,7 +923,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-      CaremaMontorControl_Move(-1, 80, 1, 100, 2000, 3000, 1000);
+      CaremaMontorControl_Move(-1, 80, 1, 100, 2000, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -973,7 +948,7 @@ void turn_on_robot::CaremaMontorControl()
       
     }else{//巡航
       moveBaseControl.Position_0=1900;
-      CaremaMontorControl_Move(-1, 80, 1, 500, 1500, 3000, 1000);
+      CaremaMontorControl_Move(-1, 80, 1, 500, 1500, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -989,7 +964,7 @@ void turn_on_robot::CaremaMontorControl()
     }
 
     if((ros::Time::now() - find_start).toSec() <0.8){//0.8秒内直接锁定，没锁定到就进入巡航,其实没啥用，够我锁定环节进入一次就足够啦.(其实是多余的，被我们淘汰的定位逻辑)
-      moveBaseControl.Position_0 = 1870;//云台上移部分，固定仰角，根据物资高度自行决定
+      moveBaseControl.Position_0 = 1900;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Position_1 = 2780;//云台上移部分，固定仰角，根据物资高度自行决定
       moveBaseControl.Speed_0 = 10000;   // 云台Y轴速度
       moveBaseControl.Speed_1 = 10000;   // 云台X轴速度, 速度拉满，确保快速锁定物资
@@ -997,7 +972,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-       CaremaMontorControl_Move(1, 80, 1, 2300, 3100, 3000, 1000);
+       CaremaMontorControl_Move(1, 80, 1, 2350, 2780, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -1021,7 +996,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-      CaremaMontorControl_Move(-1, 80, 1, 950, 1800, 1500, 1000);
+      CaremaMontorControl_Move(-1, 80, 1, 950, 1800, 1500, 1500);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -1045,7 +1020,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1980;
-       CaremaMontorControl_Move(1, 80, 1, 2300, 3300, 1500, 1000);
+       CaremaMontorControl_Move(1, 80, 1, 2300, 3300, 1500, 1500);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -1069,7 +1044,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1990;
-       CaremaMontorControl_Move(1, 80, 1, 1650, 2450, 3000, 1000);
+       CaremaMontorControl_Move(1, 80, 1, 1650, 2450, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -1093,7 +1068,7 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-      CaremaMontorControl_Move(-1, 80, 1, 900, 1400, 3000, 1000);
+      CaremaMontorControl_Move(-1, 80, 1, 900, 1400, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
@@ -1117,17 +1092,17 @@ void turn_on_robot::CaremaMontorControl()
       //After_ZhuanYunTai_flag=1;
     }else{//巡航
       moveBaseControl.Position_0=1900;
-       CaremaMontorControl_Move(1, 80, 1, 3050, 3350, 3000, 1000);
+       CaremaMontorControl_Move(1, 80, 1, 3050, 3350, 3000, 3000);
     }
 }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
   
 
 
-  //**************这边是云台移动策略第二阶段 打靶点停车搜索***********//现在不搜索了 
+  //**************这边是云台移动策略第二阶段 打靶点停车搜索***********//
   else if(stop_point_signal_msg == 1 && current_road_point_index==16 && find_center==false){//********到达打靶点
-    ROS_INFO("Start to Serch Bazi!!!!");
+    ROS_INFO("Start to Fire!!!!");
     moveBaseControl.Position_0 = 2047;//根据靶子高度自行决定
-    // CaremaMontorControl_Move(-1, 80, 1, 1700, 2400, 1000, 1000);2026.7.11删除
+    CaremaMontorControl_Move(-1, 80, 1, 1700, 2400, 1000, 1000);
   }//初始方向，移动步长，移动周期，左边限位，右边限位，云台Y轴速度，云台X轴速度
 
 
@@ -1135,39 +1110,39 @@ void turn_on_robot::CaremaMontorControl()
   else if(find_center==false)//停止点之间的过渡阶段
   {
     if(current_road_point_index==1){//第2个停止点之后
-      moveBaseControl.Position_0 = 1800;//根据物品高度自行决定
+      moveBaseControl.Position_0 = 1800;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 1000;//云台水平初始位置，根据实际情况调整
     }
     else if(current_road_point_index==2){//第3个停止点之后
-      moveBaseControl.Position_0 = 1900;//根据物品高度自行决定
+      moveBaseControl.Position_0 = 1900;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 2850;//云台水平初始位置，根据实际情况调整
     }
     else if(current_road_point_index==3){//第4个停止点之后
-      moveBaseControl.Position_0 = 1930;//根据物品高度自行决定
+      moveBaseControl.Position_0 = 1880;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 1000;//云台水平初始位置，根据实际情况调整
     }    
     else if(current_road_point_index==5){//第6个停止点之后
-      moveBaseControl.Position_0 = 1940;//根据物品高度自行决定
+      moveBaseControl.Position_0 = 1940;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 3000;//云台水平初始位置，根据实际情况调整
     }    
     else if(current_road_point_index==8){//第9个停止点之后
-      moveBaseControl.Position_0 = 1900;//根据物品高度自行决定
+      moveBaseControl.Position_0 = 1900;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 970;//云台水平初始位置，根据实际情况调整
     }    
     else if(current_road_point_index==9){//第10个停止点之后
-      moveBaseControl.Position_0 = 1900;//根据物品高度自行决定
+      moveBaseControl.Position_0 = 1900;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 1600;//云台水平初始位置，根据实际情况调整
     }        
     else if(current_road_point_index==10){
-      moveBaseControl.Position_0 = 1900;//根据物品高度自行决定
+      moveBaseControl.Position_0 = 1900;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 2780;//云台水平初始位置，根据实际情况调整
     }
     else if(current_road_point_index==11){
-      moveBaseControl.Position_0 = 1980;//根据物品高度自行决定
+      moveBaseControl.Position_0 = 1980;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 2800;//云台水平初始位置，根据实际情况调整
     }
     else if(current_road_point_index==12){
-      moveBaseControl.Position_0 = 1990;//根据物品高度自行决定
+      moveBaseControl.Position_0 = 1990;//根据靶子高度自行决定
       moveBaseControl.Position_1 = 2000;//云台水平初始位置，根据实际情况调整
     }
     else if(current_road_point_index==15){
@@ -1175,9 +1150,10 @@ void turn_on_robot::CaremaMontorControl()
       moveBaseControl.Position_1 = 2047;//云台水平初始位置，根据实际情况调整
     }
     else{
-      moveBaseControl.Position_0 = 2047;      
-      moveBaseControl.Position_1 = 2047;
-    }  
+     // moveBaseControl.Position_0 = 1900;//根据靶子高度自行决定      
+       moveBaseControl.Position_0 = 2047;//cjw打靶专用，到时候记得注释掉 然后取消注释上一行
+      moveBaseControl.Position_1 = 2047;//云台水平初始位置，根据实际情况调整
+    }    //如果到停车点,并且没看到靶子，云台保持初始位置
   }
 }
 
@@ -1200,6 +1176,7 @@ void turn_on_robot::callback_offset_center(const std_msgs::Int32MultiArray::Cons
 //           ／￣|　　 |　 |　|
 //           | (￣ヽ＿_ヽ_) __)
 //          ＼二つ
+  ROS_INFO("Fire!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");//开火！！！！！！！！！！！
   std_msgs::Int32MultiArray temp_msg = *msg;
 
   int cur_x = temp_msg.data[0];
@@ -1207,80 +1184,58 @@ void turn_on_robot::callback_offset_center(const std_msgs::Int32MultiArray::Cons
   // 置信度（0-100），用于估算靶子框大小（置信度越高→靶越近→框越大）
   int confidence = (temp_msg.data.size() >= 4) ? temp_msg.data[3] : 70;
 
-  // ── 位置误差低通滤波 ──────────────────────────────────────────────────────
-  static double x_filtered = 0.0;
-  static double y_filtered = 0.0;
-  static bool filter_inited = false;
-  if (!filter_inited)
-  {
-    x_filtered = cur_x;
-    y_filtered = cur_y;
-    filter_inited = true;
-  }
-  x_filtered = (1.0 - kPtzAlphaX) * x_filtered + kPtzAlphaX * cur_x;
-  y_filtered = (1.0 - kPtzAlphaY) * y_filtered + kPtzAlphaY * cur_y;
-  int cur_x_f = static_cast<int>(x_filtered);
-  int cur_y_f = static_cast<int>(y_filtered);
-
-  // ── 水平轴速度估计（Y轴打移动靶不需要速度估计）─────────────────────────
+  // ── 目标速度估计：两帧像素偏移差 + 低通滤波（防止检测跳变引起震荡）──────
   static int prev_x = 0;
-  static bool prev_x_inited = false;
+  static int prev_y = 0;
   static double v_x_filtered = 0.0;
-  double v_x_raw = prev_x_inited ? (cur_x_f - prev_x) : 0.0;
-  prev_x = cur_x_f;
-  prev_x_inited = true;
-  v_x_filtered = (1.0 - kPtzAlphaVel) * v_x_filtered + kPtzAlphaVel * v_x_raw;
+  static double v_y_filtered = 0.0;
+  double v_x_raw = cur_x - prev_x;  // 像素/帧，原始帧差（噪声大）
+  double v_y_raw = cur_y - prev_y;
+  prev_x = cur_x;
+  prev_y = cur_y;
+  // 低通滤波：α=0.3，平滑检测跳变，0.3越小越平滑但响应越慢，可调
+  v_x_filtered = 0.7 * v_x_filtered + 0.3 * v_x_raw;
+  v_y_filtered = 0.7 * v_y_filtered + 0.3 * v_y_raw;
 
   // ── buchan：激光与镜头物理偏差补偿（移植自冠军版）──────────────────────
   // 冠军版：buchan = 0.45*box_length - 19.6，框越大（靶越近）向下补偿越大
   // 此处用置信度线性估算框长：confidence=65→40px, confidence=100→80px
-  double estimated_box = (confidence - 65) * (kPtzBoxAtConf100 - kPtzBoxAtConf65) / (100.0 - 65.0) + kPtzBoxAtConf65;
-  estimated_box = std::max(kPtzBoxMin, estimated_box);
-  int buchan = static_cast<int>(estimated_box * kPtzBuchanK + kPtzBuchanB);
+  double estimated_box = (confidence - 65) * (80.0 - 40.0) / (100.0 - 65.0) + 40.0;
+  estimated_box = std::max(20.0, estimated_box);
+  int buchan = static_cast<int>(estimated_box * 0.45 - 19.6);  // 可调系数
 
   // ── 比例超前补偿（用滤波后的速度，替换原固定 OFFSET_X=23）──────────────
   // offset ∝ v_filtered：靶子快时超前量大，靶子慢/静止时接近0
-  int offset_x = static_cast<int>(kPtzLead * v_x_filtered);
+  static constexpr double K_LEAD = 1.5;  // 可调，若还抖动继续减小
+  int offset_x = static_cast<int>(K_LEAD * v_x_filtered);
 
-  // ── 位置指令（增量限幅，抑制跳变）───────────────────────────────────────
-  int step_y = static_cast<int>(kPtzPosGainY * (cur_y_f + buchan));
-  int step_x = static_cast<int>(kPtzPosGainX * cur_x_f) + offset_x;
-  step_y = clamp(step_y, -kPtzMaxStepY, kPtzMaxStepY);
-  step_x = clamp(step_x, -kPtzMaxStepX, kPtzMaxStepX);
-  moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + step_y;
-  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + step_x;
+  // ── 位置指令（保持原版 /2 系数，不改变跟踪增益）─────────────────────────
+  moveBaseControl.Position_0 = curYuntai_feedback_data.Position_0 + ((cur_y + buchan) / 2);
+  moveBaseControl.Position_1 = curYuntai_feedback_data.Position_1 + (cur_x / 2) + offset_x;
 
   // ── 速度输出：P 项 + 速度前馈 ────────────────────────────────────────────
-  double speed_0 = std::abs(kPtzKpY * (cur_y_f + buchan));  // Y轴只用位置误差，不加速度前馈
-  double speed_1 = std::abs(kPtzKpX * cur_x_f + kPtzKv * v_x_filtered);
+  static constexpr double KP = 500.0;  // 比例增益，可调
+  static constexpr double KV = 200.0;  // 速度前馈增益，可调
 
-  moveBaseControl.Speed_0 = clamp(speed_0, 0.0, kPtzMaxSpeedY);
-  moveBaseControl.Speed_1 = clamp(speed_1, 0.0, kPtzMaxSpeedX);
+  double speed_0 = std::abs(KP * ((cur_y + buchan) / 2.0) + KV * (v_y_filtered / 2.0));
+  double speed_1 = std::abs(KP * (cur_x / 2.0) + KV * (v_x_filtered / 2.0));
+
+  moveBaseControl.Speed_0 = clamp(speed_0, 0.0, 3700.0);
+  moveBaseControl.Speed_1 = clamp(speed_1, 0.0, 3700.0);
 
   // ── 自适应开火判定（移植冠军版，替换原固定10px阈值）─────────────────────
   // 冠军版：threshold = centerDC * box_size，靶越近框越大，允许更大绝对误差
-  double fire_threshold_x = kPtzCenterDc * estimated_box;
-  double fire_threshold_y = kPtzCenterDc * estimated_box + std::abs(buchan);
-  double fire_error_x = std::abs(cur_x_f);
-  double fire_error_y = std::abs(cur_y_f + buchan);
+  static constexpr double CENTER_DC = 0.6;  // 可调
+  double fire_threshold_x = CENTER_DC * estimated_box * 0.8;
+  double fire_threshold_y = CENTER_DC * estimated_box * 0.8 + std::abs(buchan);
 
   // 非阻塞冷却（移植冠军版，替换原 sleep(0.2s) 阻塞）
   static ros::Time last_shot_time = ros::Time(0);
-  double shot_dt = (ros::Time::now() - last_shot_time).toSec();
+  static constexpr double SHOT_INTERVAL = 0.7;  // 可调
 
-  ROS_INFO_THROTTLE(kPtzDebugPeriod,
-                    "[PTZ_TUNE] raw=(%d,%d) filt=(%d,%d) conf=%d box=%.1f buchan=%d vx_raw=%.1f vx_f=%.1f lead=%d fb=(%d,%d) step=(%d,%d) cmd=(%d,%d) spd=(%d,%d) fire_err=(%.1f,%.1f) thr=(%.1f,%.1f) shot_dt=%.2f",
-                    cur_x, cur_y, cur_x_f, cur_y_f, confidence, estimated_box, buchan,
-                    v_x_raw, v_x_filtered, offset_x,
-                    curYuntai_feedback_data.Position_0, curYuntai_feedback_data.Position_1,
-                    step_y, step_x,
-                    moveBaseControl.Position_0, moveBaseControl.Position_1,
-                    moveBaseControl.Speed_0, moveBaseControl.Speed_1,
-                    fire_error_x, fire_error_y, fire_threshold_x, fire_threshold_y, shot_dt);
-
-  if (fire_error_x < fire_threshold_x
-   && fire_error_y < fire_threshold_y
-   && shot_dt >= kPtzShotInterval)
+  if (std::abs(cur_x) < fire_threshold_x
+   && std::abs(cur_y + buchan) < fire_threshold_y
+   && (ros::Time::now() - last_shot_time).toSec() >= SHOT_INTERVAL)
   {
     std_msgs::UInt8 shotdata;
     shotdata.data = 1;
@@ -1835,7 +1790,7 @@ bool turn_on_robot::Get_Sensor_Data_New()
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "dzactuator");
-    turn_on_robot Robot_Control;
-    Robot_Control.Control();
+  turn_on_robot Robot_Control;
+  Robot_Control.Control();
   return 0;
 }

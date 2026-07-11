@@ -817,7 +817,7 @@ void MoveBase::callback_selfMaterialNumber(const std_msgs::UInt8MultiArray::Cons
                 stop_point_signal_msg.data =1;
                 stop_point_signal.publish(stop_point_signal_msg);   
                 ros::spinOnce();//处理回调函数！！！！！！！！！！！  
-                ros::Duration(180).sleep(); //打靶停止时间根据最后时间看！一共是3min！！！！！！！！Ysvv！！这里要改
+                ros::Duration(180).sleep(); //最后不用返回基地
               }
      
               
@@ -845,22 +845,27 @@ void MoveBase::callback_selfMaterialNumber(const std_msgs::UInt8MultiArray::Cons
                 else{
                   voice_id_msg.data = road_points_index+1;
                 }
+
+             
+
+
                 pub_voice_id_switch.publish(voice_id_msg);        //语音播报位置id，此时不会播报 只是下发，因为天问收满2个才会播报“位置+物品”  
               
+                
                 stop_point_signal_msg.data =1;
                 stop_point_signal.publish(stop_point_signal_msg);   //stopflag在voiceid之后，确保先往天问发送位置id，再发送停下来找物资的信号
 
                 ros::Time find_start = ros::Time::now();
                 while ((ros::ok() && find_wuzi_flag == 0) || ((ros::Time::now() - find_start).toSec() <0.04))//ros::ok(）是为了防止阻塞进程无法正常关闭（该设置是为了防止误判物资，已经被淘汰，所以设小一点无所谓）
                 {                                                                                                                                   //0.2秒内就算找到物资也不走，防止误判导致没识别到真正的物资
-                  ROS_INFO("Stopping.............................................");                                                        //后期国赛模型识别度高之后建议改成2秒，甚至1秒0秒
+                  ROS_INFO("Stopping...To...Find...Wuzi..............................");                                                        //后期国赛模型识别度高之后建议改成2秒，甚至1秒0秒
                   ros::spinOnce();//处理回调函数！！！！！！！！！！！                    因为我们前面对识别的要求已经很高了，不仅判断连续4-7次，也判断置信度
 
                   ros::Duration(0.02).sleep(); //越小 表示检测到物资就走得 越”快“
 
-                  if ((ros::Time::now() - find_start).toSec() > 10.0)//如果小车停止10s还没有检测到物资就直接走。
+                  if ((ros::Time::now() - find_start).toSec() > 6.0)//如果小车停止6s还没有检测到物资就直接走。
                   {
-                    ROS_WARN("move_base: timeout waiting for find_wuzi_flag after 10s, continuing");
+                    ROS_WARN("move_base: timeout waiting for find_wuzi_flag after 6s, continuing");
                     break;
                   }
                   
@@ -886,8 +891,8 @@ void MoveBase::callback_selfMaterialNumber(const std_msgs::UInt8MultiArray::Cons
             {
               // printf("foundObstacleFlag == %d \n",foundObstacleFlag);
               float tagetAngle = sLineControl(current_position, global_plan, &pursuitSpeed);
-              cmd_vel.linear.x = pursuitSpeed *1.291;//ysvv速度
-              cmd_vel.angular.z = tagetAngle *1.398;//ysvv角速度
+              cmd_vel.linear.x = pursuitSpeed *1.251;//ysvv速度
+              cmd_vel.angular.z = tagetAngle *1.358;//ysvv角速度
               if (foundObstacleFlag == 1)
               {
                 cmd_vel.linear.x = 0.0;
